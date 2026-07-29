@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORB DRAW — Selection Chamber</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root{
+    --bg-0:#05070C;
+    --bg-1:#0B0F18;
+    --bg-2:#12182A;
+    --line-red:#FF2A3B;
+    --gold:#E8B94D;
+    --gold-dim:#8A6C2A;
+    --silver:#C7CDD6;
+    --white:#F4F6F9;
+    --black-orb:#15171C;
+    --ink:#EDEFF4;
+    --ink-dim:#8992A6;
+    --panel-border:rgba(232,185,77,0.18);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html,body{
+    height:100%;
+    background:
+      radial-gradient(ellipse at 50% -10%, #1a2338 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 110%, #14101c 0%, transparent 50%),
+      var(--bg-0);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  body{
+    min-height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:32px 16px 64px;
+  }
+
+  /* ---------- Header ---------- */
+  .header{
+    width:100%;
+    max-width:900px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    margin-bottom:28px;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.35em;
+    color:var(--gold);
+    text-transform:uppercase;
+    opacity:0.85;
+  }
+  .title{
+    font-family:'Oswald', sans-serif;
+    font-weight:700;
+    font-size:clamp(32px, 6vw, 52px);
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    background:linear-gradient(180deg, #fff 0%, #cfd6e2 60%, #8f97ab 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-align:center;
+  }
+  .subtitle{
+    font-size:13px;
+    color:var(--ink-dim);
+    letter-spacing:0.02em;
+    text-align:center;
+  }
+
+  /* ---------- Odds strip ---------- */
+  .odds-strip{
+    width:100%;
+    max-width:900px;
+    display:flex;
+    justify-content:center;
+    gap:0;
+    margin-bottom:30px;
+    border:1px solid var(--panel-border);
+    border-radius:10px;
+    overflow:hidden;
+    background:rgba(255,255,255,0.015);
+  }
+  .odds-cell{
+    flex:1;
+    text-align:center;
+    padding:10px 4px;
+    border-right:1px solid var(--panel-border);
+    font-family:'JetBrains Mono', monospace;
+  }
+  .odds-cell:last-child{border-right:none;}
+  .odds-dot{
+    width:12px; height:12px; border-radius:50%;
+    margin:0 auto 6px;
+  }
+  .odds-pct{font-size:14px; font-weight:600; color:var(--ink);}
+  .odds-label{font-size:9px; color:var(--ink-dim); letter-spacing:0.06em; text-transform:uppercase; margin-top:2px;}
+
+  .dot-white{background:radial-gradient(circle at 35% 30%, #fff, #cfd3da);}
+  .dot-silver{background:radial-gradient(circle at 35% 30%, #eef1f5, #8b93a1);}
+  .dot-gold{background:radial-gradient(circle at 35% 30%, #ffe9a8, #b3860f);}
+  .dot-black{background:radial-gradient(circle at 35% 30%, #4a4d55, #0a0b0e); box-shadow:0 0 6px rgba(255,255,255,0.15) inset;}
+  .dot-perfect{background:radial-gradient(circle at 35% 30%, #7fe0ff, #101318); box-shadow:0 0 10px rgba(120,220,255,0.6);}
+
+  /* ---------- Chamber ---------- */
+  .chamber-wrap{
+    position:relative;
+    width:100%;
+    max-width:900px;
+    perspective:1400px;
+  }
+
+  .chamber{
+    position:relative;
+    height:190px;
+    border-radius:16px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.03), transparent 40%),
+      linear-gradient(180deg, #0d1120, #070911 70%, #050609);
+    border:1px solid rgba(232,185,77,0.22);
+    box-shadow:
+      inset 0 0 60px rgba(0,0,0,0.85),
+      inset 0 20px 40px -20px rgba(0,0,0,0.9),
+      0 20px 50px -15px rgba(0,0,0,0.7);
+    overflow:hidden;
+  }
+
+  /* vignette fade at edges of viewport */
+  .chamber::before{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(90deg,
+      var(--bg-0) 0%, transparent 12%,
+      transparent 88%, var(--bg-0) 100%);
+    z-index:5;
+    pointer-events:none;
+  }
+
+  .target-line{
+    position:absolute;
+    top:0; bottom:0; left:50%;
+    width:2px;
+    transform:translateX(-50%);
+    background:linear-gradient(180deg, transparent, var(--line-red) 15%, var(--line-red) 85%, transparent);
+    box-shadow:0 0 14px 2px rgba(255,42,59,0.75), 0 0 30px 6px rgba(255,42,59,0.35);
+    z-index:6;
+  }
+  .target-line::before, .target-line::after{
+    content:"";
+    position:absolute; left:50%; transform:translateX(-50%);
+    width:0; height:0;
+    border-left:6px solid transparent;
+    border-right:6px solid transparent;
+  }
+  .target-line::before{ top:-2px; border-top:8px solid var(--line-red); filter:drop-shadow(0 0 4px var(--line-red));}
+  .target-line::after{ bottom:-2px; border-bottom:8px solid var(--line-red); filter:drop-shadow(0 0 4px var(--line-red));}
+
+  .track-viewport{
+    position:absolute; inset:0;
+    display:flex;
+    align-items:center;
+    transform-style:preserve-3d;
+  }
+  .track{
+    display:flex;
+    align-items:center;
+    will-change:transform;
+    transform-style:preserve-3d;
+  }
+
+  .orb-slot{
+    flex:0 0 auto;
+    width:120px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transform-style:preserve-3d;
+  }
+
+  .orb{
+    width:92px; height:92px;
+    border-radius:50%;
+    position:relative;
+    transform-style:preserve-3d;
+  }
+  .orb::after{
+    content:"";
+    position:absolute; left:14%; top:10%;
+    width:34%; height:22%;
+    background:radial-gradient(ellipse, rgba(255,255,255,0.85), transparent 70%);
+    border-radius:50%;
+    filter:blur(1px);
+  }
+  .orb-shadow{
+    position:absolute; bottom:-14px; left:50%;
+    width:66px; height:14px;
+    transform:translateX(-50%);
+    background:radial-gradient(ellipse, rgba(0,0,0,0.55), transparent 70%);
+    border-radius:50%;
+  }
+
+  .orb-white{ background:radial-gradient(circle at 32% 28%, #ffffff, #d8dce3 55%, #a7adb9 100%); box-shadow: inset -10px -10px 22px rgba(120,125,140,0.35), inset 6px 6px 14px rgba(255,255,255,0.6), 0 6px 18px rgba(0,0,0,0.5);}
+  .orb-silver{ background:radial-gradient(circle at 32% 28%, #f2f4f7, #aeb5c2 45%, #6b7280 100%); box-shadow: inset -12px -12px 24px rgba(40,44,54,0.5), inset 6px 6px 16px rgba(255,255,255,0.7), 0 6px 18px rgba(0,0,0,0.5);}
+  .orb-gold{ background:radial-gradient(circle at 32% 28%, #fff2c4, #e6b93f 45%, #93700f 100%); box-shadow: inset -12px -12px 26px rgba(90,60,5,0.55), inset 6px 6px 16px rgba(255,244,200,0.75), 0 6px 20px rgba(120,80,0,0.45);}
+  .orb-black{ background:radial-gradient(circle at 32% 28%, #4b4f59, #202329 45%, #08090b 100%); box-shadow: inset -10px -10px 24px rgba(0,0,0,0.7), inset 6px 6px 14px rgba(255,255,255,0.15), 0 0 16px rgba(255,255,255,0.08), 0 6px 20px rgba(0,0,0,0.6);}
+  .orb-perfect{ background:radial-gradient(circle at 32% 28%, #cdeeff, #2a3542 45%, #05070a 100%); box-shadow: inset -10px -10px 24px rgba(0,0,0,0.7), inset 6px 6px 16px rgba(180,230,255,0.5), 0 0 24px rgba(120,220,255,0.4), 0 6px 20px rgba(0,0,0,0.6);}
+
+  /* ---------- Controls ---------- */
+  .controls{
+    margin-top:30px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:16px;
+  }
+
+  .draw-btn{
+    font-family:'Oswald', sans-serif;
+    font-weight:600;
+    font-size:18px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:#1a1305;
+    padding:16px 52px;
+    border:none;
+    border-radius:999px;
+    cursor:pointer;
+    background:linear-gradient(180deg, #ffe9a6, var(--gold) 55%, #b6860f);
+    box-shadow:
+      0 2px 0 rgba(255,255,255,0.5) inset,
+      0 -4px 10px rgba(0,0,0,0.25) inset,
+      0 10px 24px -6px rgba(232,185,77,0.55);
+    transition:transform 0.15s ease, box-shadow 0.15s ease, filter 0.2s ease;
+  }
+  .draw-btn:hover:not(:disabled){ transform:translateY(-2px); box-shadow:0 2px 0 rgba(255,255,255,0.5) inset, 0 -4px 10px rgba(0,0,0,0.25) inset, 0 14px 30px -6px rgba(232,185,77,0.7);}
+  .draw-btn:active:not(:disabled){ transform:translateY(1px) scale(0.98); }
+  .draw-btn:disabled{
+    cursor:not-allowed;
+    filter:grayscale(0.6) brightness(0.55);
+    box-shadow:none;
+  }
+
+  .result-area{
+    min-height:64px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+  }
+  .result-text{
+    font-family:'Oswald', sans-serif;
+    font-size:22px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    opacity:0;
+    transform:translateY(6px);
+    transition:opacity 0.35s ease, transform 0.35s ease;
+  }
+  .result-text.show{ opacity:1; transform:translateY(0); }
+  .result-sub{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--ink-dim);
+    letter-spacing:0.05em;
+    opacity:0;
+    transition:opacity 0.35s ease 0.1s;
+  }
+  .result-sub.show{opacity:1;}
+
+  .result-text.tone-white{color:var(--white);}
+  .result-text.tone-silver{color:var(--silver); text-shadow:0 0 12px rgba(199,205,214,0.4);}
+  .result-text.tone-gold{color:var(--gold); text-shadow:0 0 14px rgba(232,185,77,0.5);}
+  .result-text.tone-black{color:#c9cdd6; text-shadow:0 0 10px rgba(255,255,255,0.15);}
+  .result-text.tone-perfect{
+    color:#ff3b4e;
+    text-shadow:0 0 8px #ff3b4e, 0 0 22px #ff3b4e, 0 0 46px rgba(255,59,78,0.7);
+    animation:pulseGlow 0.6s ease-in-out infinite alternate;
+  }
+  @keyframes pulseGlow{
+    from{ text-shadow:0 0 6px #ff3b4e, 0 0 16px #ff3b4e, 0 0 34px rgba(255,59,78,0.6);}
+    to{ text-shadow:0 0 14px #ff3b4e, 0 0 34px #ff3b4e, 0 0 64px rgba(255,59,78,0.9);}
+  }
+
+  /* ---------- Perfect pull FX ---------- */
+  .flash-overlay{
+    position:fixed; inset:0;
+    background:#fff;
+    opacity:0;
+    pointer-events:none;
+    z-index:100;
+  }
+  .flash-overlay.fire{ animation:flashFire 0.55s ease-out forwards; }
+  @keyframes flashFire{
+    0%{opacity:0;}
+    8%{opacity:0.95;}
+    100%{opacity:0;}
+  }
+
+  .shake{ animation:screenShake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+  @keyframes screenShake{
+    10%,90%{ transform:translateX(-2px); }
+    20%,80%{ transform:translateX(4px); }
+    30%,50%,70%{ transform:translateX(-9px); }
+    40%,60%{ transform:translateX(9px); }
+  }
+
+  .bolt-layer{
+    position:absolute; inset:0;
+    pointer-events:none;
+    z-index:20;
+    opacity:0;
+  }
+  .bolt-layer.strike{ animation:boltStrike 0.5s ease-out forwards; }
+  @keyframes boltStrike{
+    0%{ opacity:0; }
+    12%{ opacity:1; }
+    30%{ opacity:0.2; }
+    45%{ opacity:1; }
+    100%{ opacity:0; }
+  }
+  .bolt-svg path{
+    filter:drop-shadow(0 0 6px #bfe9ff) drop-shadow(0 0 14px #7fd4ff);
+  }
+
+  footer{
+    margin-top:40px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    color:#4a5064;
+    letter-spacing:0.08em;
+    text-align:center;
+  }
+
+  @media (max-width:520px){
+    .chamber{ height:150px; }
+    .orb{ width:76px; height:76px; }
+    .orb-slot{ width:96px; }
+    .draw-btn{ padding:14px 40px; font-size:16px; }
+    .odds-cell{ font-size:9px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .track{ transition:none !important; }
+    .shake{ animation:none !important; }
+    .result-text.tone-perfect{ animation:none !important; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="flash-overlay" id="flashOverlay"></div>
+
+  <div class="header">
+    <div class="eyebrow">Selection Chamber · No. 001</div>
+    <div class="title">Orb Draw</div>
+    <div class="subtitle">One pull. One number, 1–100. The chamber decides.</div>
+  </div>
+
+  <div class="odds-strip">
+    <div class="odds-cell"><div class="odds-dot dot-white"></div><div class="odds-pct">20%</div><div class="odds-label">White</div></div>
+    <div class="odds-cell"><div class="odds-dot dot-silver"></div><div class="odds-pct">30%</div><div class="odds-label">Silver</div></div>
+    <div class="odds-cell"><div class="odds-dot dot-gold"></div><div class="odds-pct">44%</div><div class="odds-label">Gold</div></div>
+    <div class="odds-cell"><div class="odds-dot dot-black"></div><div class="odds-pct">5%</div><div class="odds-label">Black</div></div>
+    <div class="odds-cell"><div class="odds-dot dot-perfect"></div><div class="odds-pct">1%</div><div class="odds-label">Perfect</div></div>
+  </div>
+
+  <div class="chamber-wrap" id="chamberWrap">
+    <div class="chamber" id="chamber">
+      <div class="target-line"></div>
+      <div class="track-viewport">
+        <div class="track" id="track"></div>
+      </div>
+      <svg class="bolt-layer" id="boltLayer" viewBox="0 0 900 190" preserveAspectRatio="none">
+        <path class="bolt-svg" d="M 450 0 L 420 70 L 452 70 L 410 190 L 470 90 L 438 90 Z" fill="#eaf7ff"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="draw-btn" id="drawBtn">Draw</button>
+    <div class="result-area">
+      <div class="result-text" id="resultText">—</div>
+      <div class="result-sub" id="resultSub">&nbsp;</div>
+    </div>
+  </div>
+
+  <footer>ENGINE: 1–100 RNG · TIERS FIXED · CLIENT-SIDE ONLY</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---------- Config ----------
+  const TIERS = [
+    { id:'white',   min:1,  max:20,  label:'White Orb',        cls:'orb-white',   tone:'tone-white' },
+    { id:'silver',  min:21, max:50,  label:'Silver Orb',       cls:'orb-silver',  tone:'tone-silver' },
+    { id:'gold',    min:51, max:94,  label:'Gold Orb',         cls:'orb-gold',    tone:'tone-gold' },
+    { id:'black',   min:95, max:99,  label:'Black Orb',        cls:'orb-black',   tone:'tone-black' },
+    { id:'perfect', min:100,max:100, label:'PERFECT PULL!',    cls:'orb-perfect', tone:'tone-perfect' },
+  ];
+
+  const SLOT_WIDTH   = 120;   // must match .orb-slot width in CSS
+  const FILLER_COUNT = 46;    // dummy orbs before the winner
+  const TRAIL_COUNT  = 8;     // orbs after the winner (visual padding)
+  const SPIN_MS       = 4200; // total spin duration, JS timer must match CSS transition
+  const COOLDOWN_MS   = 1400; // pause before re-enabling Draw
+
+  const track      = document.getElementById('track');
+  const chamber    = document.getElementById('chamber');
+  const chamberWrap= document.getElementById('chamberWrap');
+  const drawBtn    = document.getElementById('drawBtn');
+  const resultText = document.getElementById('resultText');
+  const resultSub  = document.getElementById('resultSub');
+  const flashOverlay = document.getElementById('flashOverlay');
+  const boltLayer   = document.getElementById('boltLayer');
+
+  let state = 'idle'; // idle | spinning | resolving
+
+  function tierForRoll(n){
+    return TIERS.find(t => n >= t.min && n <= t.max);
+  }
+
+  function randomTierWeighted(){
+    // used only for filler orbs, so the visible track looks organic
+    const r = Math.random() * 100;
+    if (r < 20) return TIERS[0];
+    if (r < 50) return TIERS[1];
+    if (r < 94) return TIERS[2];
+    if (r < 99) return TIERS[3];
+    return TIERS[4];
+  }
+
+  function makeOrbSlot(tier){
+    const slot = document.createElement('div');
+    slot.className = 'orb-slot';
+    const orb = document.createElement('div');
+    orb.className = 'orb ' + tier.cls;
+    const shadow = document.createElement('div');
+    shadow.className = 'orb-shadow';
+    slot.appendChild(orb);
+    slot.appendChild(shadow);
+    return slot;
+  }
+
+  // Populate idle track with a relaxed scatter of orbs
+  function populateIdleTrack(){
+    track.style.transition = 'none';
+    track.innerHTML = '';
+    const count = 14;
+    for (let i=0; i<count; i++){
+      track.appendChild(makeOrbSlot(randomTierWeighted()));
+    }
+    // center roughly
+    const viewportWidth = chamber.clientWidth;
+    const totalWidth = count * SLOT_WIDTH;
+    const offset = (viewportWidth - totalWidth) / 2;
+    track.style.transform = `translateX(${offset}px)`;
+  }
+
+  function setResult(text, sub, toneClass){
+    resultText.textContent = text;
+    resultSub.textContent = sub;
+    resultText.className = 'result-text show ' + (toneClass || '');
+    resultSub.className = 'result-sub show';
+  }
+
+  function clearResult(){
+    resultText.className = 'result-text';
+    resultSub.className = 'result-sub';
+  }
+
+  function triggerPerfectFX(){
+    // screen shake
+    chamberWrap.classList.remove('shake');
+    void chamberWrap.offsetWidth; // reflow to restart animation
+    chamberWrap.classList.add('shake');
+
+    // flashbang
+    flashOverlay.classList.remove('fire');
+    void flashOverlay.offsetWidth;
+    flashOverlay.classList.add('fire');
+
+    // thunderbolt
+    boltLayer.classList.remove('strike');
+    void boltLayer.offsetWidth;
+    boltLayer.classList.add('strike');
+  }
+
+  function runDraw(){
+    if (state !== 'idle') return;
+    state = 'spinning';
+    drawBtn.disabled = true;
+    clearResult();
+
+    // 1. Roll the number NOW — this is the single source of truth
+    const roll = Math.floor(Math.random() * 100) + 1; // 1..100
+    const winningTier = tierForRoll(roll);
+
+    // 2. Build filler track + winner + trailing orbs
+    track.style.transition = 'none';
+    track.innerHTML = '';
+    for (let i=0; i<FILLER_COUNT; i++){
+      track.appendChild(makeOrbSlot(randomTierWeighted()));
+    }
+    const winnerIndex = FILLER_COUNT; // winner sits right after filler
+    track.appendChild(makeOrbSlot(winningTier));
+    for (let i=0; i<TRAIL_COUNT; i++){
+      track.appendChild(makeOrbSlot(randomTierWeighted()));
+    }
+
+    // 3. Compute destination so winner center lands on target line,
+    //    independent of current viewport width (handles resize edge case)
+    const viewportWidth = chamber.clientWidth;
+    const winnerCenter = winnerIndex * SLOT_WIDTH + SLOT_WIDTH / 2;
+    const destination = (viewportWidth / 2) - winnerCenter;
+
+    // start position: track starts slightly right of the viewport start
+    const startOffset = 40;
+    track.style.transform = `translateX(${startOffset}px)`;
+
+    // force reflow so the browser registers the start position
+    void track.offsetWidth;
+
+    // 4. Fire the GPU-accelerated slide with deceleration easing
+    track.style.transition = `transform ${SPIN_MS}ms cubic-bezier(0.12, 0.75, 0.18, 1)`;
+    // slight rotation wobble on each orb during spin for a "rolling ball" feel
+    track.querySelectorAll('.orb').forEach((orb, i) => {
+      orb.style.transition = `transform ${SPIN_MS}ms cubic-bezier(0.12,0.75,0.18,1)`;
+      orb.style.transform = `rotateY(${360 * (2 + (i % 3))}deg)`;
+    });
+
+    requestAnimationFrame(() => {
+      track.style.transform = `translateX(${destination}px)`;
+    });
+
+    // 5. JS timer mirrors the CSS duration exactly to avoid desync
+    setTimeout(() => {
+      resolveDraw(roll, winningTier);
+    }, SPIN_MS);
+  }
+
+  function resolveDraw(roll, tier){
+    state = 'resolving';
+
+    if (tier.id === 'perfect'){
+      setResult('PERFECT PULL!', `ROLL ${roll} / 100 · 1% CHANCE`, tier.tone);
+      triggerPerfectFX();
+    } else {
+      setResult(tier.label, `ROLL ${roll} / 100`, tier.tone);
+    }
+
+    setTimeout(() => {
+      state = 'idle';
+      drawBtn.disabled = false;
+    }, COOLDOWN_MS);
+  }
+
+  // Recompute idle layout on resize (edge case: rotation mid-idle)
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (state === 'idle') populateIdleTrack();
+    }, 150);
+  });
+
+  drawBtn.addEventListener('click', runDraw);
+
+  populateIdleTrack();
+})();
+</script>
+
+</body>
+</html>
