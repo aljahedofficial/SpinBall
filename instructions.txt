@@ -1,0 +1,112 @@
+Here's a full design plan that extends the draw engine you already have into a complete free-to-play football card collection game.
+
+## Quick legal note first
+
+Before the fun part — worth flagging since you specified real players. Player names and stats (goals, height, nationality, etc.) are public facts and generally fine to use. What gets risky for a *published/public* product is: official club crests/kits, real photos, and player likenesses used commercially without a license (this is exactly why EA/PES have had licensing fights for years). For a personal project or portfolio piece this is low-risk. If you ever plan to publish or monetize it, the safe path is either (a) license data properly, or (b) use stats only with original/stylized card art instead of real photos. I'll design the plan so it works either way — you can swap in real photos later if you get licensing sorted.
+
+---
+
+## 1. Concept
+
+**"Legends & Now"** — a free, no-subscription football card collector. Players open packs (via your existing orb-draw reveal mechanic), pull cards spanning **current-season players** and **retired legends**, build a collection, and compare/trade cards. No paywalls — packs are earned entirely through play, never bought with real money.
+
+---
+
+## 2. Card Tiers (mapped onto your existing RNG table)
+
+| Roll Range | Tier | Card Pool | Feel |
+|---|---|---|---|
+| 1–20 | **Bronze** | Lower-league / squad players, current season | Common, everyday pulls |
+| 21–50 | **Silver** | Solid starters, current season | Reliable, useful |
+| 51–94 | **Gold** | Star current players (top-5-league regulars) | The bread-and-butter exciting pull |
+| 95–99 | **Icon** | Retired legends (Maradona, Zidane, Ronaldinho, etc.) | Rare, nostalgic |
+| 100 | **Perfect / GOAT** | All-time greats (Pelé, Messi peak-form, Cruyff) with a boosted stat-line | The jackpot — triggers your lightning FX |
+
+This keeps your entire animation/RNG engine untouched — you're just swapping what an "orb" resolves into.
+
+---
+
+## 3. Free data sourcing (no subscriptions)
+
+Since you want zero cost:
+
+- **Public stat sites** you can manually compile from or scrape respectfully (check each site's terms before scraping): FBref (Sports Reference), Transfermarkt, Wikipedia squad/legend pages. Wikipedia data is CC-licensed and safest for reuse, including basic bios.
+- Build your own **static JSON dataset** — you only need ~150–300 players to start (e.g. 100 current stars across 5 leagues + 50 retired legends). This is a one-time manual/scripted data-entry job, not a live API, so there's no subscription cost ever.
+- **No photos required** — use generated flat-color portrait silhouettes or simple illustrated card art (your orb-shading CSS technique extends nicely to card frames) instead of real photos, sidestepping image licensing entirely.
+
+Example schema:
+```json
+{
+  "id": "p001",
+  "name": "Player Name",
+  "tier": "gold",
+  "position": "ST",
+  "nationality": "BR",
+  "league": "current" | "legend",
+  "stats": { "pace": 88, "shooting": 91, "passing": 76, "dribbling": 90, "defense": 35, "physical": 80 },
+  "era": "2024/25" | "1994-2006",
+  "flavor": "One-sentence factual note, not a quote"
+}
+```
+
+---
+
+## 4. Core game loop
+
+1. **Earn packs** — play a short daily challenge (guess-the-player, stat quiz, or just a login streak) to earn 1–3 free pack tokens per day. No currency purchases exist at all.
+2. **Open pack** — your orb-draw animation plays, reveals 5 cards per pack (extend `FILLER_COUNT`/roll loop to fire 5 independent rolls per pack instead of 1).
+3. **Collect** — cards go into a persistent collection (localStorage or a lightweight backend).
+4. **Duplicate conversion** — pulling a dupe converts it into "Shards," a free soft currency used only to guarantee your next pack has at least one Gold+ (no paid boosts, ever).
+5. **Squad Builder** — assemble an XI from your collection, see a total-stats readout (fun, not competitive/pay-to-win since nothing is purchasable).
+6. **Compare mode** — pick two cards, see a head-to-head stat radar chart.
+
+---
+
+## 5. Feature list by priority
+
+**MVP (v1)**
+- Pack opening using your existing engine, extended to 5-roll packs
+- Static JSON player database (curated by you, ~150 players)
+- Collection/binder screen (grid of owned cards, grouped by tier)
+- LocalStorage persistence (no backend needed to start)
+
+**v2**
+- Squad Builder (11-card lineup with formation)
+- Duplicate → Shards conversion, "guaranteed Gold" pack option
+- Daily free-pack timer/streak system
+
+**v3**
+- Head-to-head stat comparison with a radar chart
+- Search/filter collection by nation, position, era
+- "Legend Spotlight" — a rotating featured legend card with lore text
+
+**Stretch**
+- Simple auto-battle mini-game using assembled squads' aggregate stats
+- Shareable card image export (canvas-rendered, so no server needed)
+
+---
+
+## 6. Technical architecture (builds directly on what you have)
+
+- **Frontend**: same vanilla HTML/CSS/JS approach — no framework needed even at full scope
+- **Data layer**: single `players.json` bundled with the app; load once on init
+- **Persistence**: `localStorage` for collection + shard count (swap for a free-tier backend like Supabase later if you want cross-device sync — still free, no subscription)
+- **Rendering**: reuse your `radial-gradient`/`box-shadow` orb technique for card frame borders per tier (bronze/silver/gold/icon/perfect), so the visual language stays consistent
+- **Pack logic**: your `runDraw()` function becomes `openPack()` — loop it 5x, pushing each result into a "pack reveal" queue that plays sequentially
+
+---
+
+## 7. Suggested roadmap
+
+| Phase | Deliverable |
+|---|---|
+| 1 | Compile player dataset (150 players, JSON) |
+| 2 | Extend RNG engine to multi-card packs |
+| 3 | Build collection/binder screen + localStorage save |
+| 4 | Squad Builder + duplicate/shard system |
+| 5 | Comparison mode + polish pass (card frame art per tier) |
+| 6 | Daily-pack loop + streaks |
+
+---
+
+Want me to start on **Phase 1 + 2** — build out a starter `players.json` with a real (fact-based) roster of current stars and legends, and extend your existing HTML file so `Draw` opens a 5-card pack instead of a single orb?
