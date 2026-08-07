@@ -6,7 +6,6 @@
 <title>Talent Scanner — Prospect Draw</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Added UnifrakturMaguntia for the Old English Name Font -->
 <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Comic+Neue:wght@700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -463,7 +462,7 @@
         </div>
 
         <!-- EPIC CENTERED NAME -->
-        <div class="p-name-old-english" id="cardName">A. PROSPECT</div>
+        <div class="p-name-old-english" id="cardName">A. Prospect</div>
         
         <div class="debit-bottom">
           <div class="card-number" id="cardNumber">74 8192</div>
@@ -485,16 +484,28 @@
   let SPEED = 720;
   const MIN_LOOPS_AHEAD = 2;
 
-  // Base configurations for generation
   const RARITY_LABEL = { legendary:'Legendary', black:'Black', gold:'Gold', silver:'Silver', bronze:'Bronze', white:'White' };
 
+  // Completely expanded player pools so placeholders are never needed
   const PLAYER_POOLS = {
-    white: [ ["Ben Doak","Winger"], ["Rhys Williams","Centre-Back"], ["Jayden Danns","Forward"], ["Neco Williams","Fullback"], ["Luke Chambers","Centre-Back"], ["Kellyn Acosta","Midfielder"], ["Nathaniel Phillips","Centre-Back"], ["Bobby Clark","Midfielder"], ["Ola Aina","Fullback"], ["Josh Sargent","Forward"], ["DeAndre Yedlin","Fullback"], ["Cameron Carter-Vickers","Centre-Back"] ],
-    bronze: [ ["Jordan Henderson","Midfielder"], ["Youri Tielemans","Midfielder"], ["Wilfred Ndidi","Midfielder"], ["Conor Gallagher","Midfielder"], ["Diogo Dalot","Fullback"], ["Fabian Schär","Centre-Back"], ["James Tarkowski","Centre-Back"], ["Kalvin Phillips","Midfielder"], ["Douglas Luiz","Midfielder"], ["Joelinton","Midfielder"], ["Andros Townsend","Winger"], ["Rodrigo Bentancur","Midfielder"] ],
-    silver: [ ["Bruno Fernandes","Midfielder"], ["Declan Rice","Midfielder"], ["Martin Ødegaard","Midfielder"], ["Rodri","Midfielder"], ["Federico Valverde","Midfielder"], ["Bukayo Saka","Winger"], ["Phil Foden","Winger"], ["Achraf Hakimi","Fullback"], ["Virgil van Dijk","Centre-Back"], ["Alisson Becker","Goalkeeper"], ["Thibaut Courtois","Goalkeeper"], ["William Saliba","Centre-Back"] ],
-    gold: [ ["Erling Haaland","Striker"], ["Kylian Mbappé","Forward"], ["Vinícius Júnior","Winger"], ["Kevin De Bruyne","Midfielder"], ["Jude Bellingham","Midfielder"], ["Robert Lewandowski","Striker"], ["Harry Kane","Striker"], ["Mohamed Salah","Winger"], ["Karim Benzema","Striker"], ["Luka Modrić","Midfielder"] ],
-    black: [ ["Lionel Messi","Forward"], ["Neymar Jr","Forward"], ["Paulo Dybala","Forward"], ["James Rodríguez","Midfielder"], ["Philippe Coutinho","Midfielder"], ["Ángel Di María","Winger"], ["Marco Reus","Midfielder"], ["Lamine Yamal","Winger"], ["Christian Eriksen","Midfielder"], ["Giovani Lo Celso","Midfielder"] ],
-    legendary: [ ["Pelé","Forward"], ["Diego Maradona","Forward"], ["Johan Cruyff","Forward"], ["Zinedine Zidane","Midfielder"], ["Ronaldinho","Forward"], ["Ronaldo Nazário","Striker"], ["Franz Beckenbauer","Defender"], ["Michel Platini","Midfielder"], ["George Best","Winger"], ["Alfredo Di Stéfano","Forward"], ["Ferenc Puskás","Forward"], ["Garrincha","Winger"], ["Eusébio","Forward"], ["Bobby Charlton","Midfielder"] ],
+    white: [
+      ["Ben Doak","Winger"], ["Rhys Williams","Centre-Back"], ["Jayden Danns","Forward"], ["Neco Williams","Fullback"], ["Luke Chambers","Centre-Back"], ["Kellyn Acosta","Midfielder"], ["Nathaniel Phillips","Centre-Back"], ["Bobby Clark","Midfielder"], ["Ola Aina","Fullback"], ["Josh Sargent","Forward"], ["DeAndre Yedlin","Fullback"], ["Cameron Carter-Vickers","Centre-Back"], ["Harvey Elliott","Midfielder"], ["Curtis Jones","Midfielder"], ["Rico Lewis","Defender"], ["Cole Palmer","Midfielder"], ["Conor Bradley","Defender"], ["Oscar Bobb","Winger"], ["Kobbie Mainoo","Midfielder"], ["Alejandro Garnacho","Winger"], ["Jarell Quansah","Centre-Back"], ["James Trafford","Goalkeeper"], ["Levi Colwill","Centre-Back"], ["Stefan Bajcetic","Midfielder"], ["Lewis Miley","Midfielder"], ["Amad Diallo","Winger"], ["Willy Kambwala","Centre-Back"], ["Tino Livramento","Fullback"], ["Omari Hutchinson","Winger"], ["Lewis Hall","Fullback"], ["Malo Gusto","Fullback"], ["Alex Scott","Midfielder"], ["Jhon Duran","Forward"], ["Morgan Rogers","Midfielder"], ["Evan Ferguson","Striker"], ["Julio Enciso","Midfielder"], ["Facundo Buonanotte","Midfielder"], ["Anthony Elanga","Winger"], ["Destiny Udogie","Fullback"], ["Pape Matar Sarr","Midfielder"]
+    ], 
+    bronze: [
+      ["Jordan Henderson","Midfielder"], ["Youri Tielemans","Midfielder"], ["Wilfred Ndidi","Midfielder"], ["Conor Gallagher","Midfielder"], ["Diogo Dalot","Fullback"], ["Fabian Schär","Centre-Back"], ["James Tarkowski","Centre-Back"], ["Kalvin Phillips","Midfielder"], ["Douglas Luiz","Midfielder"], ["Joelinton","Midfielder"], ["Andros Townsend","Winger"], ["Rodrigo Bentancur","Midfielder"], ["Granit Xhaka","Midfielder"], ["Pierre-Emile Hojbjerg","Midfielder"], ["Thomas Partey","Midfielder"], ["Christian Eriksen","Midfielder"], ["Lucas Paqueta","Midfielder"], ["John McGinn","Midfielder"], ["Scott McTominay","Midfielder"], ["Fred","Midfielder"], ["Harry Maguire","Centre-Back"], ["Victor Lindelof","Centre-Back"], ["Eric Dier","Defender"], ["Ben Davies","Defender"], ["Cesar Azpilicueta","Defender"], ["Thiago Silva","Centre-Back"], ["Marcos Alonso","Fullback"], ["Kepa Arrizabalaga","Goalkeeper"], ["David De Gea","Goalkeeper"], ["Hugo Lloris","Goalkeeper"]
+    ], 
+    silver: [
+      ["Bruno Fernandes","Midfielder"], ["Declan Rice","Midfielder"], ["Martin Ødegaard","Midfielder"], ["Rodri","Midfielder"], ["Federico Valverde","Midfielder"], ["Bukayo Saka","Winger"], ["Phil Foden","Winger"], ["Achraf Hakimi","Fullback"], ["Virgil van Dijk","Centre-Back"], ["Alisson Becker","Goalkeeper"], ["Thibaut Courtois","Goalkeeper"], ["William Saliba","Centre-Back"], ["Ruben Dias","Centre-Back"], ["Ederson","Goalkeeper"], ["Bernardo Silva","Midfielder"]
+    ], 
+    gold: [
+      ["Erling Haaland","Striker"], ["Kylian Mbappé","Forward"], ["Vinícius Júnior","Winger"], ["Kevin De Bruyne","Midfielder"], ["Jude Bellingham","Midfielder"], ["Robert Lewandowski","Striker"], ["Harry Kane","Striker"], ["Mohamed Salah","Winger"], ["Karim Benzema","Striker"], ["Luka Modrić","Midfielder"]
+    ], 
+    black: [
+      ["Lionel Messi","Forward"], ["Neymar Jr","Forward"], ["Paulo Dybala","Forward"], ["James Rodríguez","Midfielder"], ["Philippe Coutinho","Midfielder"], ["Ángel Di María","Winger"], ["Marco Reus","Midfielder"], ["Lamine Yamal","Winger"], ["Antoine Griezmann","Forward"], ["Eden Hazard","Winger"]
+    ], 
+    legendary: [
+      ["Pelé","Forward"], ["Diego Maradona","Forward"], ["Johan Cruyff","Forward"], ["Zinedine Zidane","Midfielder"], ["Ronaldinho","Forward"], ["Ronaldo Nazário","Striker"], ["Franz Beckenbauer","Defender"], ["Michel Platini","Midfielder"], ["George Best","Winger"], ["Alfredo Di Stéfano","Forward"]
+    ]
   };
 
   function getUniquePlayers(pool, count, prefix) {
@@ -502,7 +513,7 @@
       let result = [];
       for(let i = 0; i < count; i++) {
           if(i < shuffled.length) result.push(shuffled[i]);
-          else result.push([`${prefix} Prospect #${i+1}`, "Prospect"]);
+          else result.push([`${prefix} Prospect #${i+1}`, "Prospect"]); 
       }
       return result;
   }
@@ -581,12 +592,10 @@
     }
   }
 
-  // ---------- State ----------
   let balls = []; let offset = 0; let lastTs = null; let lastCrossedIndex = -1; let rafId = null; let state = 'idle'; let audioCtx = null; let muted = false;
   let currentDrawnCard = null; 
   const session = { total: 0, best: null, history: [] };
 
-  // ---------- DOM ----------
   const track = document.getElementById('track'); const spinBtn = document.getElementById('spinBtn'); const tapOverlay = document.getElementById('tapOverlay');
   const selectorRing = document.getElementById('selectorRing'); const muteBtn = document.getElementById('muteBtn');
   const modal = document.getElementById('cardModal'); const playerCard = document.getElementById('playerCard'); const cardMotionWrapper = document.getElementById('cardMotionWrapper'); const nextBtn = document.getElementById('nextBtn');
@@ -730,14 +739,27 @@
   function showCard(cardData){
     playerCard.dataset.rarity = cardData.rarity;
     document.getElementById('cardRarityTag').textContent = `${cardData.rarity} TIER`;
-    document.getElementById('cardName').textContent = cardData.name;
+    
+    // Capitalize first letter logic for the Old English Font Name
+    let formattedName = cardData.name.charAt(0).toUpperCase() + cardData.name.slice(1);
+    document.getElementById('cardName').textContent = formattedName;
+    
     document.getElementById('cardPos').textContent = `${cardData.pos} • VAL 08/26`;
     document.getElementById('cardRating').textContent = cardData.rating;
     document.getElementById('cardNumber').textContent = generateCardNumber(cardData.rating);
 
     cardMotionWrapper.style.transform = '';
+    
+    // Remove class to ensure animation can be re-triggered
+    modal.classList.remove('show');
+    
     modal.classList.remove('hidden');
-    requestAnimationFrame(() => modal.classList.add('show'));
+    requestAnimationFrame(() => {
+        // Slight delay ensures the CSS animation properly fires when added to DOM
+        requestAnimationFrame(() => {
+            modal.classList.add('show');
+        });
+    });
 
     recordPull(cardData);
   }
