@@ -6,11 +6,9 @@
 <title>Talent Scanner — Prospect Draw</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Using Dancing Script for Stylish Calligraphy and Comic Neue for Full Name -->
 <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Comic+Neue:wght@700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 <style>
   :root{
-    /* Default variables for Standard Dark Themes */
     --void:#05070b;
     --panel-line: rgba(94,234,212,0.15);
     --text:#eef3f1;
@@ -21,14 +19,10 @@
     --hud-chip-bg: rgba(255,255,255,0.03);
     --overlay-bg: rgba(5,7,11,0.65);
 
-    --gold:#ffb703;
-    --gold-dim:#8a6205;
-    --cyan:#5eead4;
-    --cyan-dim: rgba(94,234,212,0.35);
+    --gold:#ffb703; --gold-dim:#8a6205;
+    --cyan:#5eead4; --cyan-dim: rgba(94,234,212,0.35);
 
-    --bg-glow-a: rgba(255,183,3,0.16);
-    --bg-glow-b: rgba(94,234,212,0.14);
-    --bg-glow-c: rgba(11,42,38,0.55);
+    --bg-glow-a: rgba(255,183,3,0.16); --bg-glow-b: rgba(94,234,212,0.14); --bg-glow-c: rgba(11,42,38,0.55);
     --bg-base-1:#060910; --bg-base-2:#050709; --bg-base-3:#040507;
 
     --white-1:#ffffff; --white-2:#f4f9ff; --white-3:#d6e8ff;
@@ -43,79 +37,24 @@
     --reel-w: calc(var(--step) * 5);
   }
 
-  /* ---------- 6 DARK THEMES ---------- */
-  body[data-theme="neon"]{
-    --gold:#ff2fd0; --gold-dim:#7a0e63; --cyan:#7cf7ff; --cyan-dim: rgba(124,247,255,0.35);
-    --bg-glow-a: rgba(255,47,208,0.18); --bg-glow-b: rgba(124,247,255,0.16); --bg-glow-c: rgba(60,10,66,0.55);
-    --bg-base-1:#0a0714; --bg-base-2:#08050f; --bg-base-3:#05030a;
-  }
-  body[data-theme="champions"]{
-    --gold:#a9c2ff; --gold-dim:#2a3a66; --cyan:#e4ecff; --cyan-dim: rgba(228,236,255,0.35);
-    --bg-glow-a: rgba(120,150,255,0.18); --bg-glow-b: rgba(200,214,255,0.14); --bg-glow-c: rgba(20,30,70,0.55);
-    --bg-base-1:#060814; --bg-base-2:#05060f; --bg-base-3:#03040a;
-  }
-  body[data-theme="executive"]{
-    --gold:#cbd5e1; --gold-dim:#475569; --cyan:#94a3b8; --cyan-dim: rgba(148,163,184,0.35);
-    --bg-glow-a: rgba(100,116,139,0.15); --bg-glow-b: rgba(71,85,105,0.15); --bg-glow-c: rgba(15,23,42,0.6);
-    --bg-base-1:#1e293b; --bg-base-2:#0f172a; --bg-base-3:#020617;
-  }
-  body[data-theme="midnight"]{
-    --gold:#38bdf8; --gold-dim:#0284c7; --cyan:#818cf8; --cyan-dim: rgba(129,140,248,0.35);
-    --bg-glow-a: rgba(56,189,248,0.1); --bg-glow-b: rgba(129,140,248,0.1); --bg-glow-c: rgba(0,0,0,0.8);
-    --bg-base-1:#09090b; --bg-base-2:#000000; --bg-base-3:#000000;
-  }
-  body[data-theme="obsidian"]{
-    --gold:#10b981; --gold-dim:#047857; --cyan:#34d399; --cyan-dim: rgba(52,211,153,0.35);
-    --bg-glow-a: rgba(16,185,129,0.15); --bg-glow-b: rgba(52,211,153,0.15); --bg-glow-c: rgba(6,78,59,0.5);
-    --bg-base-1:#18181b; --bg-base-2:#0f0f11; --bg-base-3:#050505;
-  }
-
-  /* ---------- 6 BRIGHT / CORPORATE THEMES ---------- */
-  body[data-theme="daylight"], body[data-theme="sunrise"], body[data-theme="corporate-light"], body[data-theme="arctic"], body[data-theme="sandstone"], body[data-theme="pastel"] {
-    --text: #1a202c; --text-dim: #4a5568; --void: #e2e8f0; 
-    --panel-bg-1: rgba(255,255,255,0.96); --panel-bg-2: rgba(240,244,248,0.98); 
-    --panel-line: rgba(0,0,0,0.15); --overlay-bg: rgba(255,255,255,0.8); --hud-chip-bg: rgba(0,0,0,0.05);
-  }
-  body[data-theme="daylight"]{
-    --gold:#0284c7; --gold-dim:#075985; --cyan:#0369a1; --cyan-dim: rgba(3,105,161,0.35);
-    --bg-glow-a: rgba(186,230,253,0.5); --bg-glow-b: rgba(224,242,254,0.5); --bg-glow-c: rgba(125,211,252,0.5);
-    --bg-base-1:#f0f9ff; --bg-base-2:#e0f2fe; --bg-base-3:#bae6fd;
-  }
-  body[data-theme="sunrise"]{
-    --gold:#ea580c; --gold-dim:#c2410c; --cyan:#f97316; --cyan-dim: rgba(249,115,22,0.35);
-    --bg-glow-a: rgba(253,186,116,0.5); --bg-glow-b: rgba(254,215,170,0.5); --bg-glow-c: rgba(255,237,213,0.6);
-    --bg-base-1:#fff7ed; --bg-base-2:#ffedd5; --bg-base-3:#fed7aa;
-  }
-  body[data-theme="corporate-light"]{
-    --gold:#475569; --gold-dim:#334155; --cyan:#64748b; --cyan-dim: rgba(100,116,139,0.35);
-    --bg-glow-a: rgba(226,232,240,0.6); --bg-glow-b: rgba(241,245,249,0.6); --bg-glow-c: rgba(203,213,225,0.4);
-    --bg-base-1:#ffffff; --bg-base-2:#f8fafc; --bg-base-3:#f1f5f9;
-  }
-  body[data-theme="arctic"]{
-    --gold:#0d9488; --gold-dim:#0f766e; --cyan:#14b8a6; --cyan-dim: rgba(20,184,166,0.35);
-    --bg-glow-a: rgba(153,246,228,0.4); --bg-glow-b: rgba(204,251,241,0.5); --bg-glow-c: rgba(115,232,255,0.3);
-    --bg-base-1:#f0fdfa; --bg-base-2:#ccfbf1; --bg-base-3:#99f6e4;
-  }
-  body[data-theme="sandstone"]{
-    --gold:#b45309; --gold-dim:#92400e; --cyan:#d97706; --cyan-dim: rgba(217,119,6,0.35);
-    --bg-glow-a: rgba(253,230,138,0.4); --bg-glow-b: rgba(254,243,199,0.5); --bg-glow-c: rgba(252,211,77,0.3);
-    --bg-base-1:#fffbeb; --bg-base-2:#fef3c7; --bg-base-3:#fde68a;
-  }
-  body[data-theme="pastel"]{
-    --gold:#db2777; --gold-dim:#be185d; --cyan:#c026d3; --cyan-dim: rgba(192,38,211,0.35);
-    --bg-glow-a: rgba(251,207,232,0.5); --bg-glow-b: rgba(24bc,231,243,0.5); --bg-glow-c: rgba(249,168,212,0.4);
-    --bg-base-1:#fdf2f8; --bg-base-2:#fce7f3; --bg-base-3:#fbcfe8;
-  }
+  body[data-theme="neon"]{ --gold:#ff2fd0; --gold-dim:#7a0e63; --cyan:#7cf7ff; --cyan-dim: rgba(124,247,255,0.35); --bg-glow-a: rgba(255,47,208,0.18); --bg-glow-b: rgba(124,247,255,0.16); --bg-glow-c: rgba(60,10,66,0.55); --bg-base-1:#0a0714; --bg-base-2:#08050f; --bg-base-3:#05030a; }
+  body[data-theme="champions"]{ --gold:#a9c2ff; --gold-dim:#2a3a66; --cyan:#e4ecff; --cyan-dim: rgba(228,236,255,0.35); --bg-glow-a: rgba(120,150,255,0.18); --bg-glow-b: rgba(200,214,255,0.14); --bg-glow-c: rgba(20,30,70,0.55); --bg-base-1:#060814; --bg-base-2:#05060f; --bg-base-3:#03040a; }
+  body[data-theme="executive"]{ --gold:#cbd5e1; --gold-dim:#475569; --cyan:#94a3b8; --cyan-dim: rgba(148,163,184,0.35); --bg-glow-a: rgba(100,116,139,0.15); --bg-glow-b: rgba(71,85,105,0.15); --bg-glow-c: rgba(15,23,42,0.6); --bg-base-1:#1e293b; --bg-base-2:#0f172a; --bg-base-3:#020617; }
+  body[data-theme="midnight"]{ --gold:#38bdf8; --gold-dim:#0284c7; --cyan:#818cf8; --cyan-dim: rgba(129,140,248,0.35); --bg-glow-a: rgba(56,189,248,0.1); --bg-glow-b: rgba(129,140,248,0.1); --bg-glow-c: rgba(0,0,0,0.8); --bg-base-1:#09090b; --bg-base-2:#000000; --bg-base-3:#000000; }
+  body[data-theme="obsidian"]{ --gold:#10b981; --gold-dim:#047857; --cyan:#34d399; --cyan-dim: rgba(52,211,153,0.35); --bg-glow-a: rgba(16,185,129,0.15); --bg-glow-b: rgba(52,211,153,0.15); --bg-glow-c: rgba(6,78,59,0.5); --bg-base-1:#18181b; --bg-base-2:#0f0f11; --bg-base-3:#050505; }
+  body[data-theme="daylight"], body[data-theme="sunrise"], body[data-theme="corporate-light"], body[data-theme="arctic"], body[data-theme="sandstone"], body[data-theme="pastel"] { --text: #1a202c; --text-dim: #4a5568; --void: #e2e8f0; --panel-bg-1: rgba(255,255,255,0.96); --panel-bg-2: rgba(240,244,248,0.98); --panel-line: rgba(0,0,0,0.15); --overlay-bg: rgba(255,255,255,0.8); --hud-chip-bg: rgba(0,0,0,0.05); }
+  body[data-theme="daylight"]{ --gold:#0284c7; --gold-dim:#075985; --cyan:#0369a1; --cyan-dim: rgba(3,105,161,0.35); --bg-glow-a: rgba(186,230,253,0.5); --bg-glow-b: rgba(224,242,254,0.5); --bg-glow-c: rgba(125,211,252,0.5); --bg-base-1:#f0f9ff; --bg-base-2:#e0f2fe; --bg-base-3:#bae6fd; }
+  body[data-theme="sunrise"]{ --gold:#ea580c; --gold-dim:#c2410c; --cyan:#f97316; --cyan-dim: rgba(249,115,22,0.35); --bg-glow-a: rgba(253,186,116,0.5); --bg-glow-b: rgba(254,215,170,0.5); --bg-glow-c: rgba(255,237,213,0.6); --bg-base-1:#fff7ed; --bg-base-2:#ffedd5; --bg-base-3:#fed7aa; }
+  body[data-theme="corporate-light"]{ --gold:#475569; --gold-dim:#334155; --cyan:#64748b; --cyan-dim: rgba(100,116,139,0.35); --bg-glow-a: rgba(226,232,240,0.6); --bg-glow-b: rgba(241,245,249,0.6); --bg-glow-c: rgba(203,213,225,0.4); --bg-base-1:#ffffff; --bg-base-2:#f8fafc; --bg-base-3:#f1f5f9; }
+  body[data-theme="arctic"]{ --gold:#0d9488; --gold-dim:#0f766e; --cyan:#14b8a6; --cyan-dim: rgba(20,184,166,0.35); --bg-glow-a: rgba(153,246,228,0.4); --bg-glow-b: rgba(204,251,241,0.5); --bg-glow-c: rgba(115,232,255,0.3); --bg-base-1:#f0fdfa; --bg-base-2:#ccfbf1; --bg-base-3:#99f6e4; }
+  body[data-theme="sandstone"]{ --gold:#b45309; --gold-dim:#92400e; --cyan:#d97706; --cyan-dim: rgba(217,119,6,0.35); --bg-glow-a: rgba(253,230,138,0.4); --bg-glow-b: rgba(254,243,199,0.5); --bg-glow-c: rgba(252,211,77,0.3); --bg-base-1:#fffbeb; --bg-base-2:#fef3c7; --bg-base-3:#fde68a; }
+  body[data-theme="pastel"]{ --gold:#db2777; --gold-dim:#be185d; --cyan:#c026d3; --cyan-dim: rgba(192,38,211,0.35); --bg-glow-a: rgba(251,207,232,0.5); --bg-glow-b: rgba(24bc,231,243,0.5); --bg-glow-c: rgba(249,168,212,0.4); --bg-base-1:#fdf2f8; --bg-base-2:#fce7f3; --bg-base-3:#fbcfe8; }
 
   *{box-sizing:border-box; margin:0; padding:0;}
   html,body{ width:100%; height:100%; overflow:hidden; background:var(--void); font-family:'Rajdhani', sans-serif; color:var(--text); -webkit-user-select:none; user-select:none; }
-  button{ font-family:inherit; }
-  button:focus-visible, .odds-chip:focus-visible{ outline:2px solid var(--cyan); outline-offset:2px; }
+  button{ font-family:inherit; } button:focus-visible, .odds-chip:focus-visible{ outline:2px solid var(--cyan); outline-offset:2px; }
 
-  .stadium-bg{
-    position:fixed; inset:0; z-index:0; transition: background 0.6s ease;
-    background: radial-gradient(ellipse 60% 40% at 20% -10%, var(--bg-glow-a), transparent 60%), radial-gradient(ellipse 60% 40% at 80% -10%, var(--bg-glow-b), transparent 60%), radial-gradient(ellipse 120% 60% at 50% 120%, var(--bg-glow-c), transparent 65%), linear-gradient(180deg, var(--bg-base-1) 0%, var(--bg-base-2) 55%, var(--bg-base-3) 100%);
-  }
+  .stadium-bg{ position:fixed; inset:0; z-index:0; transition: background 0.6s ease; background: radial-gradient(ellipse 60% 40% at 20% -10%, var(--bg-glow-a), transparent 60%), radial-gradient(ellipse 60% 40% at 80% -10%, var(--bg-glow-b), transparent 60%), radial-gradient(ellipse 120% 60% at 50% 120%, var(--bg-glow-c), transparent 65%), linear-gradient(180deg, var(--bg-base-1) 0%, var(--bg-base-2) 55%, var(--bg-base-3) 100%); }
   .stadium-bg::before{ content:''; position:absolute; inset:0; background: repeating-linear-gradient(100deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 60px), repeating-linear-gradient(80deg, rgba(255,255,255,0.015) 0 2px, transparent 2px 60px); mix-blend-mode:screen; opacity:0.5; }
   .stadium-bg::after{ content:''; position:absolute; left:0; right:0; bottom:0; height:38%; background: repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 46px); mask-image: linear-gradient(180deg, transparent, black 60%); transform: perspective(300px) rotateX(55deg); transform-origin: bottom; opacity:0.6; }
 
@@ -130,7 +69,6 @@
   .theme-swatch{ width:18px; height:18px; border-radius:50%; cursor:pointer; border:2px solid rgba(255,255,255,0.15); padding:0; transition:transform .15s ease, border-color .15s ease; }
   .theme-swatch:hover{ transform:scale(1.15); }
   .theme-swatch.active{ border-color:var(--gold); box-shadow:0 0 0 2px rgba(255,183,3,0.4); transform:scale(1.1); }
-  
   .icon-btn{ width:38px; height:38px; border-radius:50%; flex-shrink:0; border:1px solid var(--panel-line); background:var(--hud-chip-bg); color:var(--cyan); font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:border-color .2s, background .2s; }
   .icon-btn:hover{ border-color:var(--cyan-dim); background:rgba(150,150,150,0.15); }
 
@@ -144,8 +82,6 @@
   .scanner-wrap{ position:relative; height: var(--ball); margin: 0 auto; width: var(--reel-w); display:flex; align-items:center; }
   .rail{ position:absolute; left:0; right:0; bottom:-22px; height:2px; background: linear-gradient(90deg, transparent, var(--panel-line) 10%, var(--panel-line) 90%, transparent); }
   .rail::before{ content:''; position:absolute; inset:0; background-image: repeating-linear-gradient(90deg, var(--cyan-dim) 0 1px, transparent 1px var(--step)); opacity:0.5; }
-  
-  /* Even on bright themes, the scanner track stays dark so the balls stand out */
   .track-viewport{ position:relative; width:var(--reel-w); height:var(--ball); overflow:hidden; border-radius: calc(var(--ball) / 3); background: radial-gradient(ellipse 120% 220% at 50% 50%, rgba(11,42,38,0.55), transparent 72%), radial-gradient(ellipse 60% 200% at 15% 50%, rgba(255,183,3,0.16), transparent 70%), radial-gradient(ellipse 60% 200% at 85% 50%, rgba(94,234,212,0.14), transparent 70%), linear-gradient(180deg, rgba(0,0,0,0.65), rgba(0,0,0,0.85)); box-shadow: inset 0 2px 10px rgba(0,0,0,0.8), inset 0 -2px 6px rgba(255,255,255,0.03); mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%); }
   .track{ position:absolute; top:0; left:0; height:var(--ball); will-change:transform; }
 
@@ -163,7 +99,6 @@
   .ball[data-rarity="black"] .ball-inner::before{ content:''; position:absolute; inset:0; border-radius:50%; background: conic-gradient(from 210deg, rgba(94,234,212,0.06), rgba(167,139,250,0.05), transparent 40%); mix-blend-mode:screen; }
   .ball[data-rarity="legendary"] .ball-inner{ background: radial-gradient(circle at 32% 28%, var(--legend-1), var(--legend-2) 55%, var(--legend-3) 100%); box-shadow: inset -10px -14px 22px rgba(0,0,0,0.6), inset 8px 10px 16px rgba(255,183,3,0.28), 0 6px 22px rgba(217,38,201,0.35); }
   .ball[data-rarity="legendary"] .ball-inner::before{ content:''; position:absolute; inset:0; border-radius:50%; background: conic-gradient(from 140deg, rgba(255,183,3,0.3), rgba(255,255,255,0.2), transparent 45%); mix-blend-mode:screen; }
-
   .ball.dimmed{ opacity:0.18; filter:saturate(0.4); }
   .ball.pop{ animation: ballPop 0.75s cubic-bezier(.2,1.4,.4,1) forwards; z-index:5; }
   @keyframes ballPop{ 0%{ transform:scale(1); } 35%{ transform:scale(1.55); filter:brightness(1.6) saturate(1.3); } 60%{ transform:scale(1.32); filter:brightness(1.3); } 100%{ transform:scale(1.4); filter:brightness(1.15); } }
@@ -190,7 +125,7 @@
   .reel-endcap.left{ left:-14px; } .reel-endcap.right{ right:-14px; }
 
   .hud-bottom{ position:relative; z-index:3; display:flex; justify-content:center; gap:12px; margin-top: 6vh; flex-wrap:wrap; padding:0 20px; }
-  .odds-chip{ display:flex; align-items:center; gap:8px; padding:7px 13px; border-radius:999px; background:var(--hud-chip-bg); border:1px solid var(--panel-line); font-size:12px; letter-spacing:0.06em; color:var(--text-dim); font-weight:600; }
+  .odds-chip{ display:flex; align-items:center; gap:8px; padding:7px 13px; border-radius:999px; background:var(--hud-chip-bg); border:1px solid var(--panel-line); font-size:12px; letter-spacing:0.06em; color:var(--text-dim); font-weight:600; transition: transform 0.2s; }
   .odds-chip .dot{ width:10px; height:10px; border-radius:50%; }
   .odds-chip .val{ color:var(--text); }
   .odds-chip[data-r="white"] .dot{ background:linear-gradient(135deg,var(--white-1),var(--white-3)); }
@@ -217,35 +152,40 @@
   .tap-overlay span{ margin-bottom:5vh; font-family:'Teko', sans-serif; font-size:22px; letter-spacing:0.3em; font-weight:600; color:var(--cyan); padding:13px 36px; border:1px solid var(--cyan-dim); border-radius:999px; background:var(--overlay-bg); backdrop-filter: blur(4px); animation: pulseTap 1.3s ease-in-out infinite; }
   @keyframes pulseTap{ 0%,100%{ box-shadow:0 0 0 0 rgba(94,234,212,0.35); } 50%{ box-shadow:0 0 0 12px rgba(94,234,212,0); } }
 
-  .dash-panel, .players-panel{ position:fixed; top:0; bottom:0; z-index:8; width:320px; max-width:88vw; background: linear-gradient(180deg, var(--panel-bg-1), var(--panel-bg-2)); box-shadow: 0 0 50px rgba(0,0,0,0.5); transition: transform .35s cubic-bezier(.2,1,.3,1); display:flex; flex-direction:column; padding: 22px 20px; overflow-y:auto; }
-  .dash-panel { right:0; border-left:1px solid var(--panel-line); transform: translateX(100%); }
-  .players-panel { left:0; border-right:1px solid var(--panel-line); transform: translateX(-100%); }
+  /* Expanded Dashboard for Analytics */
+  .dash-panel, .players-panel{ position:fixed; top:0; bottom:0; z-index:8; background: linear-gradient(180deg, var(--panel-bg-1), var(--panel-bg-2)); box-shadow: 0 0 50px rgba(0,0,0,0.5); transition: transform .35s cubic-bezier(.2,1,.3,1); display:flex; flex-direction:column; padding: 22px 20px; overflow-y:auto; }
+  
+  .players-panel { left:0; width:320px; max-width:88vw; border-right:1px solid var(--panel-line); transform: translateX(-100%); }
+  .dash-panel { right:0; width:450px; max-width:100vw; border-left:1px solid var(--panel-line); transform: translateX(100%); }
+  
   .dash-panel.open, .players-panel.open { transform: translateX(0); }
-  .dash-head, .players-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; }
-  .dash-head h2, .players-head h2 { font-family:'Teko',sans-serif; font-size:22px; letter-spacing:0.14em; font-weight:600; color:var(--text); }
+  .dash-head, .players-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; flex-shrink: 0; }
+  .dash-head h2, .players-head h2 { font-family:'Teko',sans-serif; font-size:24px; letter-spacing:0.14em; font-weight:600; color:var(--text); }
   .dash-close, .players-close { background:none; border:none; color:var(--text-dim); font-size:20px; cursor:pointer; line-height:1; padding:4px; }
   .dash-close:hover, .players-close:hover { color:var(--text); }
   .players-hint{ font-size:11px; color:var(--text-dim); letter-spacing:0.04em; margin-bottom:16px; line-height:1.5; }
-  .dash-stats{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px; }
-  .dash-stat{ background:var(--hud-chip-bg); border:1px solid var(--panel-line); border-radius:12px; padding:12px; }
-  .dash-stat .num{ font-family:'Teko',sans-serif; font-size:30px; font-weight:700; line-height:1; color:var(--text); }
-  .dash-stat .lbl{ font-size:11px; color:var(--text-dim); letter-spacing:0.1em; font-weight:600; margin-top:4px; }
-  .dash-section-title{ font-size:12px; letter-spacing:0.2em; color:var(--text-dim); font-weight:600; margin:8px 0 10px; }
-  .dist-row{ display:flex; align-items:center; gap:8px; margin-bottom:8px; }
-  .dist-label{ width:64px; flex-shrink:0; font-size:11px; font-weight:600; color:var(--text-dim); letter-spacing:0.04em; }
-  .dist-bar{ position:relative; flex:1; height:10px; border-radius:6px; background:rgba(150,150,150,0.1); overflow:visible; }
-  .dist-fill{ height:100%; border-radius:6px; width:0%; transition:width .5s ease; }
-  .dist-target{ position:absolute; top:-3px; width:2px; height:16px; background:rgba(150,150,150,0.5); left:0%; }
-  .dist-pct{ width:34px; text-align:right; font-size:11px; color:var(--text-dim); flex-shrink:0; }
-  .dist-fill[data-r="white"]{ background:linear-gradient(90deg,var(--white-3),var(--white-1)); }
-  .dist-fill[data-r="bronze"]{ background:linear-gradient(90deg,var(--bronze-3),var(--bronze-1)); }
-  .dist-fill[data-r="silver"]{ background:linear-gradient(90deg,var(--silver-3),var(--silver-1)); }
-  .dist-fill[data-r="gold"]{ background:linear-gradient(90deg,var(--gold-3),var(--gold-1)); }
-  .dist-fill[data-r="black"]{ background:linear-gradient(90deg,#555,#000); }
-  .dist-fill[data-r="legendary"]{ background:linear-gradient(90deg,var(--legend-3),var(--legend-1)); }
+  
+  /* Advanced Dashboard Layout */
+  .dash-section-title{ font-size:12px; letter-spacing:0.2em; color:var(--text-dim); font-weight:600; margin:16px 0 8px; border-bottom: 1px solid var(--panel-line); padding-bottom: 4px; }
+  .dash-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .dash-stat-box { background:var(--hud-chip-bg); border:1px solid var(--panel-line); border-radius:8px; padding:12px; text-align: center; }
+  .dash-stat-box .num { font-family:'Teko',sans-serif; font-size:32px; font-weight:700; line-height:1; color:var(--text); }
+  .dash-stat-box .lbl { font-size:10px; color:var(--text-dim); letter-spacing:0.1em; font-weight:600; margin-top:4px; text-transform: uppercase; }
+  
+  /* Scatterplot Trend Graph */
+  .chart-container { width: 100%; height: 140px; background: rgba(0,0,0,0.15); border: 1px solid var(--panel-line); border-radius: 8px; margin-bottom: 10px; position: relative; }
+  #trendChart { width: 100%; height: 100%; }
+
+  /* Positional Distribution row */
+  .pos-dist-row { display: flex; justify-content: space-between; gap: 4px; }
+  .pos-item { flex: 1; background: var(--hud-chip-bg); padding: 8px 0; border-radius: 6px; text-align: center; border: 1px solid var(--panel-line); }
+  .pos-item .p-lbl { font-size: 10px; color: var(--text-dim); font-weight: 600; }
+  .pos-item .p-val { font-family: 'Teko', sans-serif; font-size: 20px; color: var(--text); font-weight: 700; line-height: 1.2; }
+  .pos-item .p-avg { font-size: 9px; color: var(--gold); }
+
   .history-list{ display:flex; flex-direction:column; gap:6px; margin-top:4px; }
   .history-empty{ font-size:12px; color:var(--text-dim); padding:10px 0; text-align:center; }
-  .hist-row{ display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:10px; background:var(--hud-chip-bg); border:1px solid transparent; animation: histIn .3s ease; }
+  .hist-row{ display:flex; align-items:center; gap:10px; padding:6px 10px; border-radius:8px; background:var(--hud-chip-bg); border:1px solid transparent; animation: histIn .3s ease; }
   @keyframes histIn{ from{ opacity:0; transform:translateX(8px); } to{ opacity:1; transform:translateX(0); } }
   .hist-dot{ width:10px; height:10px; border-radius:50%; flex-shrink:0; }
   .hist-dot[data-r="white"]{ background:linear-gradient(135deg,var(--white-1),var(--white-3)); }
@@ -256,7 +196,7 @@
   .hist-dot[data-r="legendary"]{ background:linear-gradient(135deg,var(--legend-1),var(--legend-3)); }
   .hist-name{ flex:1; font-size:13px; font-weight:600; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .hist-rating{ font-family:'Teko',sans-serif; font-size:17px; font-weight:700; color:var(--text); }
-  .dash-reset{ margin-top:18px; width:100%; padding:10px; border-radius:10px; background:var(--hud-chip-bg); border:1px solid var(--panel-line); color:var(--text-dim); font-size:12px; letter-spacing:0.14em; font-weight:600; cursor:pointer; }
+  .dash-reset{ margin-top:18px; width:100%; padding:10px; border-radius:10px; background:var(--hud-chip-bg); border:1px solid var(--panel-line); color:var(--text-dim); font-size:12px; letter-spacing:0.14em; font-weight:600; cursor:pointer; flex-shrink: 0; }
   .dash-reset:hover{ color:var(--text); border-color:var(--cyan-dim); }
 
   .plyr-group{ margin-bottom:16px; }
@@ -311,53 +251,20 @@
   .bank-name { font-size: 16px; font-weight: 700; font-family: 'Comic Neue', 'Comic Sans MS', cursive; letter-spacing: 0.15em; opacity: 0.9; }
   .rarity-tag-sharp { font-family: 'Comic Neue', 'Comic Sans MS', cursive; font-size: 14px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 4px; }
   
-  /* NEW DEEP BLUE RATING BOX ON TOP RIGHT */
   .p-rating-large { 
-    position: absolute; 
-    top: 15px; 
-    right: 15px; 
-    background: #002244; /* Deep Corporate Blue */
-    padding: 8px 16px;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.25);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.8), inset 0 2px 10px rgba(255,255,255,0.1);
-    font-family: 'Comic Neue', 'Comic Sans MS', cursive; 
-    font-size: 50px; 
-    font-weight: 700; 
-    line-height: 1; 
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.9); 
-    z-index: 10;
+    position: absolute; top: 15px; right: 15px; background: #002244; padding: 8px 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.8), inset 0 2px 10px rgba(255,255,255,0.1); font-family: 'Comic Neue', 'Comic Sans MS', cursive; 
+    font-size: 50px; font-weight: 700; line-height: 1; text-shadow: 2px 2px 5px rgba(0,0,0,0.9); z-index: 10;
   }
   
-  /* EPIC CENTERED CALLIGRAPHY NICKNAME */
   .p-nickname-calligraphy { 
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    width: 90%; 
-    text-align: center; 
-    font-family: 'Dancing Script', cursive; 
-    font-size: 60px; 
-    font-weight: 700;
-    color: #fff; 
-    opacity: 0;
-    pointer-events: none;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transform: translate(-50%, -50%) translateZ(-20px) scale(0.5); 
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.9), 0 0 15px rgba(255,255,255,0.6);
+    position: absolute; top: 50%; left: 50%; width: 90%; text-align: center; font-family: 'Dancing Script', cursive; 
+    font-size: 60px; font-weight: 700; color: #fff; opacity: 0; pointer-events: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    transform: translate(-50%, -50%) translateZ(-20px) scale(0.5); text-shadow: 2px 2px 10px rgba(0,0,0,0.9), 0 0 15px rgba(255,255,255,0.6);
   }
   
-  .modal.show .p-nickname-calligraphy {
-    animation: epicNameReveal 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards;
-  }
-
-  @keyframes epicNameReveal {
-    0% { opacity: 0; transform: translate(-50%, -50%) translateZ(-20px) scale(0.5); filter: blur(8px); }
-    50% { opacity: 1; filter: blur(0px); }
-    100% { opacity: 1; transform: translate(-50%, -50%) translateZ(50px) scale(1.0); filter: blur(0px); }
-  }
+  .modal.show .p-nickname-calligraphy { animation: epicNameReveal 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards; }
+  @keyframes epicNameReveal { 0% { opacity: 0; transform: translate(-50%, -50%) translateZ(-20px) scale(0.5); filter: blur(8px); } 50% { opacity: 1; filter: blur(0px); } 100% { opacity: 1; transform: translate(-50%, -50%) translateZ(50px) scale(1.0); filter: blur(0px); } }
 
   .debit-bottom { display: flex; flex-direction: column; gap: 4px; }
   .card-number { font-family: 'Comic Neue', 'Comic Sans MS', cursive; font-size: 22px; font-weight: 700; letter-spacing: 0.2em; opacity: 0.8; margin-bottom: 10px; }
@@ -368,7 +275,6 @@
   .next-btn:hover{ background:#fff; transform:translateZ(40px) translateY(-2px); }
   .next-btn:active{ transform:translateZ(40px) translateY(0); }
 
-  /* DYNAMIC RARITY THEMES */
   .premium-debit-card[data-rarity="white"] .fluid-bg { background: conic-gradient(from 90deg, #00ffff, #ffffff, #8be9fd, #ffffff, #00ffff); }
   .premium-debit-card[data-rarity="white"] .card-border-glow { border-color: #00ffff; box-shadow: inset 0 0 15px #00ffff, 0 0 20px #00ffff; }
   .premium-debit-card[data-rarity="white"] .p-rating-large { color: #ffffff; }
@@ -400,26 +306,20 @@
   .premium-debit-card[data-rarity="legendary"] .p-nickname-calligraphy { text-shadow: 2px 2px 10px rgba(0,0,0,0.9), 0 0 20px #ff1493; color: #ffddf4;}
 
   @media (max-width:380px){
-    :root{ --ball:38px; --gap:8px; }
-    .scanner-outer{ margin-top:5vh; }
-    .brand h1{ font-size:15px; } .brand .sub{ display:none; } .hud-top{ padding:14px 14px 0; } .hud-controls{ gap:6px; } .icon-btn{ width:32px; height:32px; font-size:13px; } .theme-swatch{ width:16px; height:16px; } .hud-bottom{ gap:6px; margin-top:2vh; } .odds-chip{ padding:4px 8px; font-size:9px; } .spin-btn{ padding:10px 32px; font-size:16px; bottom:2.8vh; } .dash-panel, .players-panel{ width:100vw; max-width:100vw; } .card-motion-wrapper { width: 280px; height: 440px; } .tries-counter { top: 60px; font-size: 16px; padding: 4px 16px; }
-    .p-nickname-calligraphy { font-size: 45px; } .p-rating-large { font-size: 40px; padding: 6px 12px; }
+    :root{ --ball:38px; --gap:8px; } .scanner-outer{ margin-top:5vh; } .brand h1{ font-size:15px; } .brand .sub{ display:none; } .hud-top{ padding:14px 14px 0; } .hud-controls{ gap:6px; } .icon-btn{ width:32px; height:32px; font-size:13px; } .theme-swatch{ width:16px; height:16px; } .hud-bottom{ gap:6px; margin-top:2vh; } .odds-chip{ padding:4px 8px; font-size:9px; } .spin-btn{ padding:10px 32px; font-size:16px; bottom:2.8vh; } .players-panel{ width:100vw; max-width:100vw; } .dash-panel{ width: 100vw; } .card-motion-wrapper { width: 280px; height: 440px; } .tries-counter { top: 60px; font-size: 16px; padding: 4px 16px; } .p-nickname-calligraphy { font-size: 45px; } .p-rating-large { font-size: 40px; padding: 6px 12px; }
   }
   @media (min-width:381px) and (max-width:600px){
-    :root{ --ball:48px; --gap:10px; }
-    .scanner-outer{ margin-top:7vh; } .brand h1{ font-size:18px; } .brand .sub{ display:none; } .hud-bottom{ gap:7px; margin-top:2vh; } .odds-chip{ padding:5px 9px; font-size:10.5px; } .spin-btn{ padding:12px 38px; font-size:19px; bottom:3.5vh; } .dash-panel, .players-panel{ width:100vw; max-width:100vw; }
+    :root{ --ball:48px; --gap:10px; } .scanner-outer{ margin-top:7vh; } .brand h1{ font-size:18px; } .brand .sub{ display:none; } .hud-bottom{ gap:7px; margin-top:2vh; } .odds-chip{ padding:5px 9px; font-size:10.5px; } .spin-btn{ padding:12px 38px; font-size:19px; bottom:3.5vh; } .players-panel{ width:100vw; max-width:100vw; } .dash-panel{ width: 100vw; }
   }
-  @media (min-width:601px) and (max-width:767px){ :root{ --ball:86px; --gap:14px; } .brand h1{ font-size:21px; } .spin-btn{ padding:13px 44px; font-size:21px; } .dash-panel, .players-panel{ width:340px; } }
-  @media (min-width:768px) and (max-width:1023px){ :root{ --ball:100px; --gap:18px; } .brand h1{ font-size:23px; } .scanner-outer{ margin-top:8vh; } }
-  @media (min-width:1024px) and (max-width:1439px){ :root{ --ball:100px; --gap:22px; } }
-  @media (min-width:1440px) and (max-width:1919px){ :root{ --ball:114px; --gap:25px; } .brand h1{ font-size:29px; } .panel-label{ font-size:14px; } .odds-chip{ font-size:13px; padding:8px 15px; } .spin-btn{ padding:16px 58px; font-size:27px; } .p-nickname-calligraphy { font-size: 70px; } }
+  @media (min-width:601px) and (max-width:767px){ :root{ --ball:86px; --gap:14px; } .brand h1{ font-size:21px; } .spin-btn{ padding:13px 44px; font-size:21px; } .players-panel{ width:340px; } .dash-panel{ width: 400px; } }
+  @media (min-width:768px) and (max-width:1023px){ :root{ --ball:100px; --gap:18px; } .brand h1{ font-size:23px; } .scanner-outer{ margin-top:8vh; } .dash-panel { width: 450px; } }
+  @media (min-width:1024px) and (max-width:1439px){ :root{ --ball:100px; --gap:22px; } .dash-panel { width: 450px; } }
+  @media (min-width:1440px) and (max-width:1919px){ :root{ --ball:114px; --gap:25px; } .brand h1{ font-size:29px; } .panel-label{ font-size:14px; } .odds-chip{ font-size:13px; padding:8px 15px; } .spin-btn{ padding:16px 58px; font-size:27px; } .p-nickname-calligraphy { font-size: 70px; } .dash-panel { width: 500px; } }
   @media (min-width:1920px){
-    :root{ --ball:150px; --gap:32px; } .brand h1{ font-size:38px; letter-spacing:0.14em; } .brand .sub{ font-size:14px; } .brand .mark{ width:14px; height:14px; } .panel-label{ font-size:17px; margin-bottom:22px; } .icon-btn{ width:50px; height:50px; font-size:22px; } .theme-swatch{ width:28px; height:28px; } .odds-chip{ padding:12px 22px; font-size:18px; gap:11px; } .odds-chip .dot{ width:14px; height:14px; } .spin-btn{ padding:22px 78px; font-size:36px; bottom:6vh; } .tap-overlay span{ font-size:28px; padding:16px 44px; } .dash-panel, .players-panel{ width:440px; } .dash-stat .num{ font-size:40px; } .dash-stat .lbl{ font-size:14px; } .card-motion-wrapper { width: 440px; height: 660px; } .scanner-outer{ margin-top:11vh; } .hud-bottom{ margin-top:8vh; gap:16px; } .tries-counter { top: 90px; font-size: 26px; padding: 10px 32px; } .tries-counter span { font-size: 34px; }
-    .p-nickname-calligraphy { font-size: 90px; } .p-rating-large { font-size: 65px; padding: 12px 22px;}
+    :root{ --ball:150px; --gap:32px; } .brand h1{ font-size:38px; letter-spacing:0.14em; } .brand .sub{ font-size:14px; } .brand .mark{ width:14px; height:14px; } .panel-label{ font-size:17px; margin-bottom:22px; } .icon-btn{ width:50px; height:50px; font-size:22px; } .theme-swatch{ width:28px; height:28px; } .odds-chip{ padding:12px 22px; font-size:18px; gap:11px; } .odds-chip .dot{ width:14px; height:14px; } .spin-btn{ padding:22px 78px; font-size:36px; bottom:6vh; } .tap-overlay span{ font-size:28px; padding:16px 44px; } .players-panel{ width:440px; } .dash-panel{ width:550px; } .dash-stat-box .num{ font-size:40px; } .dash-stat-box .lbl{ font-size:14px; } .card-motion-wrapper { width: 440px; height: 660px; } .scanner-outer{ margin-top:11vh; } .hud-bottom{ margin-top:8vh; gap:16px; } .tries-counter { top: 90px; font-size: 26px; padding: 10px 32px; } .tries-counter span { font-size: 34px; } .p-nickname-calligraphy { font-size: 90px; } .p-rating-large { font-size: 65px; padding: 12px 22px;}
   }
   @media (max-height:440px) and (orientation:landscape){
-    :root{ --ball:56px; --gap:10px; } .scanner-outer{ margin-top:3.5vh; } .hud-top{ padding:8px 16px 0; } .hud-bottom{ margin-top:1vh; gap:6px; } .odds-chip{ padding:3px 7px; font-size:9px; } .spin-btn{ bottom:1.2vh; padding:8px 28px; font-size:15px; } .panel-label{ margin-bottom:6px; } .card-motion-wrapper { width: 220px; height: 340px; } .tries-counter { top: 40px; font-size: 14px; padding: 4px 12px; } .tries-counter span { font-size: 18px; }
-    .p-nickname-calligraphy { font-size: 40px; } .p-rating-large { font-size: 35px; top: 10px; right: 10px; padding: 6px 12px; } .p-fullname-comic { font-size: 15px;}
+    :root{ --ball:56px; --gap:10px; } .scanner-outer{ margin-top:3.5vh; } .hud-top{ padding:8px 16px 0; } .hud-bottom{ margin-top:1vh; gap:6px; } .odds-chip{ padding:3px 7px; font-size:9px; } .spin-btn{ bottom:1.2vh; padding:8px 28px; font-size:15px; } .panel-label{ margin-bottom:6px; } .card-motion-wrapper { width: 220px; height: 340px; } .tries-counter { top: 40px; font-size: 14px; padding: 4px 12px; } .tries-counter span { font-size: 18px; } .p-nickname-calligraphy { font-size: 40px; } .p-rating-large { font-size: 35px; top: 10px; right: 10px; padding: 6px 12px; } .p-fullname-comic { font-size: 15px;}
   }
   .sr-only{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
   @media (prefers-reduced-motion: reduce){ .ring-dashed{ animation:none; } .tap-overlay span{ animation:none; } .dash-panel{ transition:none; } .players-panel{ transition:none; } body.thunder-shake{ animation:none; } .thunder-flash.strike{ animation-duration:0.15s; } .fluid-bg { animation: none; } .card-motion-wrapper { transition: none; transform: none !important; } .modal.show .p-nickname-calligraphy { animation: none; opacity: 1; transform: translate(-50%, -50%) translateZ(50px) scale(1); filter: blur(0px); } }
@@ -443,19 +343,17 @@
   <div class="brand">
     <span class="mark"></span>
     <h1>TALENT SCANNER</h1>
-    <span class="sub">PROSPECT DRAW</span>
+    <span class="sub" style="letter-spacing:0.2em;">MINHAJ SQUAD DRAW</span>
   </div>
   <div class="hud-controls">
     <!-- 12 Theme Swatches Grid (6 Dark, 6 Bright) -->
     <div class="theme-row" role="group" aria-label="Background theme">
-      <!-- Dark Corporate -->
       <button class="theme-swatch active" data-t="stadium" style="background:#0b2a26" title="Stadium"></button>
       <button class="theme-swatch" data-t="neon" style="background:#120a24" title="Neon"></button>
       <button class="theme-swatch" data-t="champions" style="background:#060814" title="Champions"></button>
       <button class="theme-swatch" data-t="executive" style="background:#0f172a" title="Executive Slate"></button>
       <button class="theme-swatch" data-t="midnight" style="background:#000000" title="Pure Midnight"></button>
       <button class="theme-swatch" data-t="obsidian" style="background:#050505" title="Obsidian Green"></button>
-      <!-- Bright Corporate -->
       <button class="theme-swatch" data-t="daylight" style="background:#e0f2fe" title="Daylight Blue"></button>
       <button class="theme-swatch" data-t="sunrise" style="background:#ffedd5" title="Sunrise Orange"></button>
       <button class="theme-swatch" data-t="corporate-light" style="background:#f8fafc" title="Corporate Light"></button>
@@ -514,19 +412,45 @@
 
 <div class="tap-overlay hidden" id="tapOverlay"><span>TAP TO STOP</span></div>
 
+<!-- ADVANCED ANALYTICAL DASHBOARD -->
 <div class="dash-panel" id="dashPanel" aria-label="Scan dashboard">
   <div class="dash-head">
-    <h2>SCAN LOG</h2>
+    <h2>ANALYTICS & METRICS</h2>
     <button class="dash-close" id="dashClose" aria-label="Close dashboard">✕</button>
   </div>
-  <div class="dash-stats">
-    <div class="dash-stat"><div class="num" id="statTotal">0</div><div class="lbl">TOTAL SCANS</div></div>
-    <div class="dash-stat"><div class="num" id="statBest">—</div><div class="lbl">BEST OVERALL</div></div>
+
+  <div class="dash-section-title" style="margin-top:0;">OVERVIEW & LUCK INDEX</div>
+  <div class="dash-stats-grid">
+    <div class="dash-stat-box"><div class="num" id="statTotal">0</div><div class="lbl">Total Pulled</div></div>
+    <div class="dash-stat-box"><div class="num" id="statEvGap">0</div><div class="lbl">Gold+ EV Gap</div></div>
+    <div class="dash-stat-box"><div class="num" id="statDryStreak">0</div><div class="lbl">Current Dry Streak</div></div>
+    <div class="dash-stat-box"><div class="num" id="statBest">—</div><div class="lbl">Peak Rating</div></div>
   </div>
+
+  <div class="dash-section-title">RATING SCATTERPLOT & TREND (LAST 20)</div>
+  <div class="chart-container">
+      <canvas id="trendChart"></canvas>
+  </div>
+
+  <div class="dash-section-title">STATISTICAL METRICS</div>
+  <div class="dash-stats-grid">
+    <div class="dash-stat-box" title="Coefficient of Variation (Volatility)"><div class="num" id="statCV">0%</div><div class="lbl">Volatility (CV)</div></div>
+    <div class="dash-stat-box"><div class="num" id="statSMA">—</div><div class="lbl">Moving Avg (Last 5)</div></div>
+  </div>
+
+  <div class="dash-section-title">POSITIONAL DISTRIBUTION</div>
+  <div class="pos-dist-row">
+      <div class="pos-item"><div class="p-lbl">FWD</div><div class="p-val" id="posFWD">0</div><div class="p-avg" id="avgFWD">Avg: 0</div></div>
+      <div class="pos-item"><div class="p-lbl">MID</div><div class="p-val" id="posMID">0</div><div class="p-avg" id="avgMID">Avg: 0</div></div>
+      <div class="pos-item"><div class="p-lbl">DEF</div><div class="p-val" id="posDEF">0</div><div class="p-avg" id="avgDEF">Avg: 0</div></div>
+      <div class="pos-item"><div class="p-lbl">GK</div><div class="p-val" id="posGK">0</div><div class="p-avg" id="avgGK">Avg: 0</div></div>
+  </div>
+
   <div class="dash-section-title">RECENT PULLS</div>
   <div class="history-list" id="historyList">
-    <div class="history-empty">No scans yet — run the reel to begin.</div>
+    <div class="history-empty">No scans yet.</div>
   </div>
+  
   <button class="dash-reset" id="dashReset">MANUAL RESET (Restores 101 Pool)</button>
 </div>
 
@@ -569,58 +493,25 @@
   "use strict";
 
   let BALL = 100, GAP = 22, STEP = BALL + GAP;
-  const VISIBLE = 5;
-  const M = 120; 
-  let SPEED = 720;
-  const MIN_LOOPS_AHEAD = 2;
+  const VISIBLE = 5, M = 120; let SPEED = 720; const MIN_LOOPS_AHEAD = 2;
 
   const RARITY_LABEL = { legendary:'Legendary', black:'Black', gold:'Gold', silver:'Silver', bronze:'Bronze', white:'White' };
   const RARITIES = [
-    { key:'legendary', weight:1,  ratingMin:100, ratingMax:104 },
-    { key:'black',     weight:4,  ratingMin:96,  ratingMax:99  },
-    { key:'gold',      weight:10, ratingMin:90,  ratingMax:95  },
-    { key:'silver',    weight:15, ratingMin:81,  ratingMax:90  },
-    { key:'bronze',    weight:30, ratingMin:70,  ratingMax:80  },
-    { key:'white',     weight:40, ratingMin:60,  ratingMax:70  },
+    { key:'legendary', weight:1,  ratingMin:100, ratingMax:104, color: '#ff1493' },
+    { key:'black',     weight:4,  ratingMin:96,  ratingMax:99,  color: '#ff00ff' },
+    { key:'gold',      weight:10, ratingMin:90,  ratingMax:95,  color: '#ffd700' },
+    { key:'silver',    weight:15, ratingMin:81,  ratingMax:90,  color: '#00bfff' },
+    { key:'bronze',    weight:30, ratingMin:70,  ratingMax:80,  color: '#ff8c00' },
+    { key:'white',     weight:40, ratingMin:60,  ratingMax:70,  color: '#00ffff' },
   ];
 
-  // Completely expanded explicit unique real player databases.
   const PLAYER_POOLS = {
-    white: [
-      ["Ben Doak","Doak","Winger"], ["Rhys Williams","Williams","Centre-Back"], ["Jayden Danns","Danns","Forward"], ["Neco Williams","N. Williams","Fullback"], ["Luke Chambers","Chambers","Centre-Back"], 
-      ["Kellyn Acosta","Acosta","Midfielder"], ["Nathaniel Phillips","Phillips","Centre-Back"], ["Bobby Clark","Clark","Midfielder"], ["Ola Aina","Aina","Fullback"], ["Josh Sargent","Sargent","Forward"], 
-      ["DeAndre Yedlin","Yedlin","Fullback"], ["Cameron Carter-Vickers","CCV","Centre-Back"], ["Harvey Elliott","Elliott","Midfielder"], ["Curtis Jones","Jones","Midfielder"], ["Rico Lewis","Lewis","Defender"], 
-      ["Cole Palmer","Palmer","Midfielder"], ["Conor Bradley","Bradley","Defender"], ["Oscar Bobb","Bobb","Winger"], ["Kobbie Mainoo","Mainoo","Midfielder"], ["Alejandro Garnacho","Garnacho","Winger"], 
-      ["Jarell Quansah","Quansah","Centre-Back"], ["James Trafford","Trafford","Goalkeeper"], ["Levi Colwill","Colwill","Centre-Back"], ["Stefan Bajcetic","Bajcetic","Midfielder"], ["Lewis Miley","Miley","Midfielder"], 
-      ["Amad Diallo","Amad","Winger"], ["Willy Kambwala","Kambwala","Centre-Back"], ["Tino Livramento","Livramento","Fullback"], ["Omari Hutchinson","Hutchinson","Winger"], ["Lewis Hall","Hall","Fullback"], 
-      ["Malo Gusto","Gusto","Fullback"], ["Alex Scott","Scott","Midfielder"], ["Jhon Duran","Duran","Forward"], ["Morgan Rogers","Rogers","Midfielder"], ["Evan Ferguson","Ferguson","Striker"], 
-      ["Julio Enciso","Enciso","Midfielder"], ["Facundo Buonanotte","Buonanotte","Midfielder"], ["Anthony Elanga","Elanga","Winger"], ["Destiny Udogie","Udogie","Fullback"], ["Pape Matar Sarr","Sarr","Midfielder"]
-    ],
-    bronze: [
-      ["Jordan Henderson","Henderson","Midfielder"], ["Youri Tielemans","Tielemans","Midfielder"], ["Wilfred Ndidi","Ndidi","Midfielder"], ["Conor Gallagher","Gallagher","Midfielder"], ["Diogo Dalot","Dalot","Fullback"], 
-      ["Fabian Schär","Schär","Centre-Back"], ["James Tarkowski","Tarkowski","Centre-Back"], ["Kalvin Phillips","Phillips","Midfielder"], ["Douglas Luiz","Luiz","Midfielder"], ["Joelinton","Joelinton","Midfielder"], 
-      ["Andros Townsend","Townsend","Winger"], ["Rodrigo Bentancur","Bentancur","Midfielder"], ["Granit Xhaka","Xhaka","Midfielder"], ["Pierre-Emile Hojbjerg","Hojbjerg","Midfielder"], ["Thomas Partey","Partey","Midfielder"], 
-      ["Christian Eriksen","Eriksen","Midfielder"], ["Lucas Paqueta","Paqueta","Midfielder"], ["John McGinn","McGinn","Midfielder"], ["Scott McTominay","McTominay","Midfielder"], ["Fred","Fred","Midfielder"], 
-      ["Harry Maguire","Maguire","Centre-Back"], ["Victor Lindelof","Lindelof","Centre-Back"], ["Eric Dier","Dier","Defender"], ["Ben Davies","Davies","Defender"], ["Cesar Azpilicueta","Azpilicueta","Defender"], 
-      ["Thiago Silva","Thiago","Centre-Back"], ["Marcos Alonso","Alonso","Fullback"], ["Kepa Arrizabalaga","Kepa","Goalkeeper"], ["David De Gea","De Gea","Goalkeeper"], ["Hugo Lloris","Lloris","Goalkeeper"]
-    ],
-    silver: [
-      ["Bruno Fernandes","Bruno","Midfielder"], ["Declan Rice","Rice","Midfielder"], ["Martin Ødegaard","Ødegaard","Midfielder"], ["Rodri","Rodri","Midfielder"], ["Federico Valverde","Valverde","Midfielder"], 
-      ["Bukayo Saka","Saka","Winger"], ["Phil Foden","Foden","Winger"], ["Achraf Hakimi","Hakimi","Fullback"], ["Virgil van Dijk","Van Dijk","Centre-Back"], ["Alisson Becker","Alisson","Goalkeeper"], 
-      ["Thibaut Courtois","Courtois","Goalkeeper"], ["William Saliba","Saliba","Centre-Back"], ["Ruben Dias","Dias","Centre-Back"], ["Ederson","Ederson","Goalkeeper"], ["Bernardo Silva","Bernardo","Midfielder"]
-    ],
-    gold: [
-      ["Erling Haaland","Haaland","Striker"], ["Kylian Mbappé","Mbappé","Forward"], ["Vinícius Júnior","Vini Jr.","Winger"], ["Kevin De Bruyne","De Bruyne","Midfielder"], ["Jude Bellingham","Bellingham","Midfielder"], 
-      ["Robert Lewandowski","Lewandowski","Striker"], ["Harry Kane","Kane","Striker"], ["Mohamed Salah","Salah","Winger"], ["Karim Benzema","Benzema","Striker"], ["Luka Modrić","Modrić","Midfielder"]
-    ],
-    black: [
-      ["Lionel Messi","Messi","Forward"], ["Neymar Jr","Neymar","Forward"], ["Paulo Dybala","Dybala","Forward"], ["James Rodríguez","James","Midfielder"], ["Philippe Coutinho","Coutinho","Midfielder"], 
-      ["Ángel Di María","Di María","Winger"], ["Marco Reus","Reus","Midfielder"], ["Lamine Yamal","Yamal","Winger"], ["Antoine Griezmann","Griezmann","Forward"], ["Eden Hazard","Hazard","Winger"]
-    ],
-    legendary: [
-      ["Pelé","Pelé","Forward"], ["Diego Maradona","Maradona","Forward"], ["Johan Cruyff","Cruyff","Forward"], ["Zinedine Zidane","Zidane","Midfielder"], ["Ronaldinho","Ronaldinho","Forward"], 
-      ["Ronaldo Nazário","R9","Striker"], ["Franz Beckenbauer","Beckenbauer","Defender"], ["Michel Platini","Platini","Midfielder"], ["George Best","Best","Winger"], ["Alfredo Di Stéfano","Di Stéfano","Forward"]
-    ]
+    white: [ ["Ben Doak","Doak","Winger"], ["Rhys Williams","Williams","Centre-Back"], ["Jayden Danns","Danns","Forward"], ["Neco Williams","N. Williams","Fullback"], ["Luke Chambers","Chambers","Centre-Back"], ["Kellyn Acosta","Acosta","Midfielder"], ["Nathaniel Phillips","Phillips","Centre-Back"], ["Bobby Clark","Clark","Midfielder"], ["Ola Aina","Aina","Fullback"], ["Josh Sargent","Sargent","Forward"], ["DeAndre Yedlin","Yedlin","Fullback"], ["Cameron Carter-Vickers","CCV","Centre-Back"], ["Harvey Elliott","Elliott","Midfielder"], ["Curtis Jones","Jones","Midfielder"], ["Rico Lewis","Lewis","Defender"], ["Cole Palmer","Palmer","Midfielder"], ["Conor Bradley","Bradley","Defender"], ["Oscar Bobb","Bobb","Winger"], ["Kobbie Mainoo","Mainoo","Midfielder"], ["Alejandro Garnacho","Garnacho","Winger"], ["Jarell Quansah","Quansah","Centre-Back"], ["James Trafford","Trafford","Goalkeeper"], ["Levi Colwill","Colwill","Centre-Back"], ["Stefan Bajcetic","Bajcetic","Midfielder"], ["Lewis Miley","Miley","Midfielder"], ["Amad Diallo","Amad","Winger"], ["Willy Kambwala","Kambwala","Centre-Back"], ["Tino Livramento","Livramento","Fullback"], ["Omari Hutchinson","Hutchinson","Winger"], ["Lewis Hall","Hall","Fullback"], ["Malo Gusto","Gusto","Fullback"], ["Alex Scott","Scott","Midfielder"], ["Jhon Duran","Duran","Forward"], ["Morgan Rogers","Rogers","Midfielder"], ["Evan Ferguson","Ferguson","Striker"], ["Julio Enciso","Enciso","Midfielder"], ["Facundo Buonanotte","Buonanotte","Midfielder"], ["Anthony Elanga","Elanga","Winger"], ["Destiny Udogie","Udogie","Fullback"], ["Pape Matar Sarr","Sarr","Midfielder"] ],
+    bronze: [ ["Jordan Henderson","Henderson","Midfielder"], ["Youri Tielemans","Tielemans","Midfielder"], ["Wilfred Ndidi","Ndidi","Midfielder"], ["Conor Gallagher","Gallagher","Midfielder"], ["Diogo Dalot","Dalot","Fullback"], ["Fabian Schär","Schär","Centre-Back"], ["James Tarkowski","Tarkowski","Centre-Back"], ["Kalvin Phillips","Phillips","Midfielder"], ["Douglas Luiz","Luiz","Midfielder"], ["Joelinton","Joelinton","Midfielder"], ["Andros Townsend","Townsend","Winger"], ["Rodrigo Bentancur","Bentancur","Midfielder"], ["Granit Xhaka","Xhaka","Midfielder"], ["Pierre-Emile Hojbjerg","Hojbjerg","Midfielder"], ["Thomas Partey","Partey","Midfielder"], ["Christian Eriksen","Eriksen","Midfielder"], ["Lucas Paqueta","Paqueta","Midfielder"], ["John McGinn","McGinn","Midfielder"], ["Scott McTominay","McTominay","Midfielder"], ["Fred","Fred","Midfielder"], ["Harry Maguire","Maguire","Centre-Back"], ["Victor Lindelof","Lindelof","Centre-Back"], ["Eric Dier","Dier","Defender"], ["Ben Davies","Davies","Defender"], ["Cesar Azpilicueta","Azpilicueta","Defender"], ["Thiago Silva","Thiago","Centre-Back"], ["Marcos Alonso","Alonso","Fullback"], ["Kepa Arrizabalaga","Kepa","Goalkeeper"], ["David De Gea","De Gea","Goalkeeper"], ["Hugo Lloris","Lloris","Goalkeeper"] ],
+    silver: [ ["Bruno Fernandes","Bruno","Midfielder"], ["Declan Rice","Rice","Midfielder"], ["Martin Ødegaard","Ødegaard","Midfielder"], ["Rodri","Rodri","Midfielder"], ["Federico Valverde","Valverde","Midfielder"], ["Bukayo Saka","Saka","Winger"], ["Phil Foden","Foden","Winger"], ["Achraf Hakimi","Hakimi","Fullback"], ["Virgil van Dijk","Van Dijk","Centre-Back"], ["Alisson Becker","Alisson","Goalkeeper"], ["Thibaut Courtois","Courtois","Goalkeeper"], ["William Saliba","Saliba","Centre-Back"], ["Ruben Dias","Dias","Centre-Back"], ["Ederson","Ederson","Goalkeeper"], ["Bernardo Silva","Bernardo","Midfielder"] ],
+    gold: [ ["Erling Haaland","Haaland","Striker"], ["Kylian Mbappé","Mbappé","Forward"], ["Vinícius Júnior","Vini Jr.","Winger"], ["Kevin De Bruyne","De Bruyne","Midfielder"], ["Jude Bellingham","Bellingham","Midfielder"], ["Robert Lewandowski","Lewandowski","Striker"], ["Harry Kane","Kane","Striker"], ["Mohamed Salah","Salah","Winger"], ["Karim Benzema","Benzema","Striker"], ["Luka Modrić","Modrić","Midfielder"] ],
+    black: [ ["Lionel Messi","Messi","Forward"], ["Neymar Jr","Neymar","Forward"], ["Paulo Dybala","Dybala","Forward"], ["James Rodríguez","James","Midfielder"], ["Philippe Coutinho","Coutinho","Midfielder"], ["Ángel Di María","Di María","Winger"], ["Marco Reus","Reus","Midfielder"], ["Lamine Yamal","Yamal","Winger"], ["Antoine Griezmann","Griezmann","Forward"], ["Eden Hazard","Hazard","Winger"] ],
+    legendary: [ ["Pelé","Pelé","Forward"], ["Diego Maradona","Maradona","Forward"], ["Johan Cruyff","Cruyff","Forward"], ["Zinedine Zidane","Zidane","Midfielder"], ["Ronaldinho","Ronaldinho","Forward"], ["Ronaldo Nazário","R9","Striker"], ["Franz Beckenbauer","Beckenbauer","Defender"], ["Michel Platini","Platini","Midfielder"], ["George Best","Best","Winger"], ["Alfredo Di Stéfano","Di Stéfano","Forward"] ]
   };
 
   function getUniquePlayers(pool, count) {
@@ -628,12 +519,27 @@
       return shuffled.slice(0, count);
   }
 
-  // ---------- 101 Ball Finite Pool Mechanism ----------
+  // ---------- Analytical State ----------
   let drawPool = [];
-  
+  const session = { 
+    total: 0, best: null, history: [], allRatings: [],
+    posData: { FWD: {sum:0, count:0}, MID: {sum:0, count:0}, DEF: {sum:0, count:0}, GK: {sum:0, count:0} },
+    dryStreak: 0,
+    expectedGoldPlus: 0,
+    actualGoldPlus: 0
+  };
+
+  // Maps exact string to standard categories
+  function getPosCategory(posStr) {
+      if (['Striker', 'Forward', 'Winger'].includes(posStr)) return 'FWD';
+      if (['Midfielder'].includes(posStr)) return 'MID';
+      if (['Defender', 'Centre-Back', 'Fullback'].includes(posStr)) return 'DEF';
+      if (['Goalkeeper'].includes(posStr)) return 'GK';
+      return 'FWD';
+  }
+
   function initDrawPool() {
     drawPool = [];
-    
     let w = getUniquePlayers(PLAYER_POOLS.white, 40);
     let br = getUniquePlayers(PLAYER_POOLS.bronze, 30);
     let sl = getUniquePlayers(PLAYER_POOLS.silver, 15);
@@ -648,28 +554,21 @@
         });
     };
     
-    addBalls(w, 'white', 60, 70);
-    addBalls(br, 'bronze', 70, 80);
-    addBalls(sl, 'silver', 81, 90);
-    addBalls(gl, 'gold', 90, 95);
-    addBalls(bl, 'black', 96, 100);
-    addBalls(lg, 'legendary', 101, 101);
+    addBalls(w, 'white', 60, 70); addBalls(br, 'bronze', 70, 80); addBalls(sl, 'silver', 81, 90);
+    addBalls(gl, 'gold', 90, 95); addBalls(bl, 'black', 96, 100); addBalls(lg, 'legendary', 101, 101);
     
     for (let i = drawPool.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [drawPool[i], drawPool[j]] = [drawPool[j], drawPool[i]];
     }
     
-    updateOddsUI();
-    updateTriesUI();
-    renderPlayers();
+    updateOddsUI(); updateTriesUI(); renderPlayers();
   }
 
   function updateOddsUI() {
       let counts = { white: 0, bronze: 0, silver: 0, gold: 0, black: 0, legendary: 0 };
       drawPool.forEach(b => counts[b.rarity]++);
       let total = drawPool.length;
-      
       for(let r in counts) {
           let chip = document.querySelector(`.odds-chip[data-r="${r}"] .val`);
           if(chip) {
@@ -680,33 +579,22 @@
   }
 
   function updateTriesUI() {
-    let remaining = drawPool.length;
-    let drawn = 101 - remaining;
+    let remaining = drawPool.length; let drawn = 101 - remaining;
     document.querySelector('#triesCounter span').textContent = remaining;
-    
     const endOptions = document.getElementById('endOptions');
-    
     if (drawn === 100 && remaining === 1) {
-        spinBtn.classList.add('hidden');
-        endOptions.classList.remove('hidden');
+        spinBtn.classList.add('hidden'); endOptions.classList.remove('hidden');
     } else if (remaining === 0) {
-        endOptions.classList.add('hidden');
-        spinBtn.classList.remove('hidden');
-        spinBtn.textContent = "POOL EMPTY (RESET TO PLAY)";
-        spinBtn.style.opacity = "0.5";
-        spinBtn.style.pointerEvents = "none";
+        endOptions.classList.add('hidden'); spinBtn.classList.remove('hidden');
+        spinBtn.textContent = "POOL EMPTY (RESET TO PLAY)"; spinBtn.style.opacity = "0.5"; spinBtn.style.pointerEvents = "none";
     } else {
-        endOptions.classList.add('hidden');
-        spinBtn.classList.remove('hidden');
-        spinBtn.textContent = `SCAN BALL`;
-        spinBtn.style.opacity = "1";
-        spinBtn.style.pointerEvents = "auto";
+        endOptions.classList.add('hidden'); spinBtn.classList.remove('hidden');
+        spinBtn.textContent = `SCAN BALL`; spinBtn.style.opacity = "1"; spinBtn.style.pointerEvents = "auto";
     }
   }
 
   let balls = []; let offset = 0; let lastTs = null; let lastCrossedIndex = -1; let rafId = null; let state = 'idle'; let audioCtx = null; let muted = false;
   let currentDrawnCard = null; 
-  const session = { total: 0, best: null, history: [] };
 
   const track = document.getElementById('track'); const spinBtn = document.getElementById('spinBtn'); const tapOverlay = document.getElementById('tapOverlay');
   const selectorRing = document.getElementById('selectorRing'); const muteBtn = document.getElementById('muteBtn');
@@ -720,8 +608,7 @@
   let PADDING = 0;
   function readMetrics(){
     const cs = getComputedStyle(document.documentElement);
-    const ballPx = parseFloat(cs.getPropertyValue('--ball'));
-    const gapPx = parseFloat(cs.getPropertyValue('--gap'));
+    const ballPx = parseFloat(cs.getPropertyValue('--ball')); const gapPx = parseFloat(cs.getPropertyValue('--gap'));
     BALL = Number.isFinite(ballPx) && ballPx > 0 ? ballPx : 100; GAP = Number.isFinite(gapPx) && gapPx > 0 ? gapPx : 22;
     STEP = BALL + GAP; SPEED = STEP * 5.9; PADDING = Math.round((STEP * VISIBLE) / 2 - BALL / 2);
   }
@@ -731,9 +618,7 @@
       return drawPool[Math.floor(Math.random() * drawPool.length)].rarity;
   }
 
-  function buildBalls(){ 
-      balls = new Array(M).fill(0).map(() => { return { rarity: pickRarityForVisualTrack() }; }); 
-  }
+  function buildBalls(){ balls = new Array(M).fill(0).map(() => { return { rarity: pickRarityForVisualTrack() }; }); }
 
   function renderBalls(){
     track.innerHTML = ''; track.style.width = (PADDING + M * STEP + BALL) + 'px';
@@ -744,9 +629,7 @@
     });
   }
 
-  function applyTransform(rawOffset){
-    const wrapped = rawOffset % (M * STEP); track.style.transform = `translateX(${-wrapped}px)`;
-  }
+  function applyTransform(rawOffset){ const wrapped = rawOffset % (M * STEP); track.style.transform = `translateX(${-wrapped}px)`; }
 
   function ctx(){ if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); return audioCtx; }
   function tone(freq, dur, type, gainVal){
@@ -781,15 +664,10 @@
   }
   function findTargetIndex(fromRawOffset, outcomeRarity){
     const currentIdx = Math.floor(fromRawOffset / STEP);
-    const searchStart = currentIdx + 1 + MIN_LOOPS_AHEAD * M;
-    const searchLimit = searchStart + M * 4;
-    for(let g = searchStart; g < searchLimit; g++){
-      if(balls[((g % M) + M) % M].rarity === outcomeRarity) return g;
-    }
-    const fallback = searchStart + 5;
-    balls[fallback % M].rarity = outcomeRarity;
-    const domEl = track.querySelectorAll('.ball')[fallback % M];
-    if(domEl) domEl.dataset.rarity = outcomeRarity;
+    const searchStart = currentIdx + 1 + MIN_LOOPS_AHEAD * M; const searchLimit = searchStart + M * 4;
+    for(let g = searchStart; g < searchLimit; g++){ if(balls[((g % M) + M) % M].rarity === outcomeRarity) return g; }
+    const fallback = searchStart + 5; balls[fallback % M].rarity = outcomeRarity;
+    const domEl = track.querySelectorAll('.ball')[fallback % M]; if(domEl) domEl.dataset.rarity = outcomeRarity;
     return fallback;
   }
   function easeOutDecel(t){ return 1 - Math.pow(1 - t, 5.5); }
@@ -799,9 +677,7 @@
     state = 'stopping'; cancelAnimationFrame(rafId); tapOverlay.classList.add('hidden');
     
     currentDrawnCard = drawPool.pop();
-    updateTriesUI();
-    updateOddsUI();
-    renderPlayers(); // Dynamically update the player list
+    updateTriesUI(); updateOddsUI(); renderPlayers(); 
     
     const startOffset = offset;
     const targetGlobalIndex = findTargetIndex(startOffset, currentDrawnCard.rarity);
@@ -855,22 +731,15 @@
   function showCard(cardData){
     playerCard.dataset.rarity = cardData.rarity;
     document.getElementById('cardRarityTag').textContent = `${cardData.rarity} TIER`;
-    
     document.getElementById('cardNickname').textContent = cardData.nickname;
     document.getElementById('cardFullName').textContent = cardData.fullName;
-    
     document.getElementById('cardPos').textContent = `${cardData.pos} • VAL 08/26`;
     document.getElementById('cardRating').textContent = cardData.rating;
     document.getElementById('cardNumber').textContent = generateCardNumber(cardData.rating);
 
     cardMotionWrapper.style.transform = '';
-    modal.classList.remove('show');
-    modal.classList.remove('hidden');
-    requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-            modal.classList.add('show');
-        });
-    });
+    modal.classList.remove('show'); modal.classList.remove('hidden');
+    requestAnimationFrame(() => { requestAnimationFrame(() => { modal.classList.add('show'); }); });
 
     recordPull(cardData);
   }
@@ -884,20 +753,135 @@
   });
   modal.addEventListener('mouseleave', () => { cardMotionWrapper.style.transform = `translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg)`; });
 
+  /* ---------- Analytics Engine ---------- */
   function recordPull(entry){
-    session.total++; session.history.unshift(entry);
+    session.total++;
+    session.allRatings.push(entry.rating);
+    session.history.unshift(entry);
     if(session.history.length > 20) session.history.pop();
     if(!session.best || entry.rating > session.best.rating) session.best = entry;
+
+    // EV Gap: Expected Gold+ was (16/101)*total. 
+    session.expectedGoldPlus = (16 / 101) * session.total;
+    if (['gold', 'black', 'legendary'].includes(entry.rarity)) {
+        session.actualGoldPlus++;
+        session.dryStreak = 0;
+    } else {
+        session.dryStreak++;
+    }
+
+    // Positional Data
+    let cat = getPosCategory(entry.pos);
+    session.posData[cat].sum += entry.rating;
+    session.posData[cat].count++;
+
     renderDashboard();
+    drawScatterplot();
+  }
+
+  function calcCV() {
+      if (session.allRatings.length === 0) return 0;
+      const mean = session.allRatings.reduce((a,b)=>a+b,0) / session.allRatings.length;
+      const variance = session.allRatings.reduce((a,b)=>a+Math.pow(b-mean,2),0) / session.allRatings.length;
+      const stdDev = Math.sqrt(variance);
+      return (stdDev / mean) * 100;
   }
 
   function renderDashboard(){
-    statTotal.textContent = session.total; statBest.textContent = session.best ? session.best.rating : '—';
-    if(session.history.length === 0){ historyList.innerHTML = '<div class="history-empty">No scans yet — run the reel to begin.</div>'; }
+    document.getElementById('statTotal').textContent = session.total; 
+    document.getElementById('statBest').textContent = session.best ? session.best.rating : '—';
+    
+    let evGap = session.actualGoldPlus - session.expectedGoldPlus;
+    let evSign = evGap > 0 ? "+" : "";
+    document.getElementById('statEvGap').textContent = session.total > 0 ? evSign + evGap.toFixed(1) : "0";
+    document.getElementById('statDryStreak').textContent = session.dryStreak;
+
+    // Statistical Metrics
+    document.getElementById('statCV').textContent = session.total > 0 ? calcCV().toFixed(1) + "%" : "0%";
+    
+    // SMA (Last 5)
+    let sma = "—";
+    if (session.allRatings.length > 0) {
+        let last5 = session.allRatings.slice(-5);
+        sma = (last5.reduce((a,b)=>a+b,0) / last5.length).toFixed(1);
+    }
+    document.getElementById('statSMA').textContent = sma;
+
+    // Positional Averages
+    ['FWD', 'MID', 'DEF', 'GK'].forEach(cat => {
+        let data = session.posData[cat];
+        document.getElementById(`pos${cat}`).textContent = data.count;
+        document.getElementById(`avg${cat}`).textContent = data.count > 0 ? `Avg: ${(data.sum/data.count).toFixed(1)}` : `Avg: 0`;
+    });
+
+    if(session.history.length === 0){ historyList.innerHTML = '<div class="history-empty">No scans yet.</div>'; }
     else{ historyList.innerHTML = session.history.map(h => `<div class="hist-row"><span class="hist-dot" data-r="${h.rarity}"></span><span class="hist-name">${h.fullName}</span><span class="hist-rating">${h.rating}</span></div>`).join(''); }
   }
 
-  function openDash(){ closePlayers(); dashPanel.classList.add('open'); }
+  // Draw the Scatterplot tracking recent pulls and Moving Average
+  function drawScatterplot() {
+      const canvas = document.getElementById('trendChart');
+      if(!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width = canvas.parentElement.clientWidth;
+      const h = canvas.height = canvas.parentElement.clientHeight;
+
+      ctx.clearRect(0, 0, w, h);
+      if(session.allRatings.length === 0) {
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--text-dim');
+          ctx.font = '12px sans-serif';
+          ctx.fillText("Data builds after draw...", 10, 20);
+          return;
+      }
+
+      // Plot last 20 (or total if less)
+      const maxPoints = 20;
+      const points = session.allRatings.slice(-maxPoints);
+      const historyRarities = session.history.slice(0, maxPoints).reverse(); // Match order
+
+      const minR = 60, maxR = 104;
+      const padding = 15;
+      const graphW = w - (padding * 2);
+      const graphH = h - (padding * 2);
+
+      // Draw horizontal grid lines
+      ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--panel-line');
+      ctx.lineWidth = 1;
+      [60, 70, 80, 90, 100].forEach(val => {
+          let y = padding + graphH - ((val - minR) / (maxR - minR)) * graphH;
+          ctx.beginPath(); ctx.moveTo(padding, y); ctx.lineTo(w - padding, y); ctx.stroke();
+      });
+
+      // Draw Trendline (Moving Average of 3)
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+      ctx.lineWidth = 2;
+      for(let i=0; i<points.length; i++) {
+          let x = padding + (i / Math.max(1, points.length - 1)) * graphW;
+          let y = padding + graphH - ((points[i] - minR) / (maxR - minR)) * graphH;
+          if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+
+      // Draw Scatter points
+      for(let i=0; i<points.length; i++) {
+          let x = padding + (i / Math.max(1, points.length - 1)) * graphW;
+          let y = padding + graphH - ((points[i] - minR) / (maxR - minR)) * graphH;
+          
+          let rarityObj = RARITIES.find(r => r.key === historyRarities[i].rarity);
+          ctx.fillStyle = rarityObj ? rarityObj.color : '#fff';
+          
+          ctx.beginPath();
+          ctx.arc(x, y, 4, 0, Math.PI*2);
+          ctx.fill();
+          ctx.strokeStyle = '#000';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+      }
+  }
+
+
+  function openDash(){ closePlayers(); dashPanel.classList.add('open'); drawScatterplot(); }
   function closeDash(){ dashPanel.classList.remove('open'); }
   dashBtn.addEventListener('click', () => { dashPanel.classList.contains('open') ? closeDash() : openDash(); });
   dashClose.addEventListener('click', closeDash);
@@ -908,10 +892,10 @@
   playersClose.addEventListener('click', closePlayers);
   
   function triggerReset() {
-      session.total = 0; session.best = null; session.history = []; 
-      renderDashboard(); 
-      initDrawPool(); 
-      resetAll(); 
+      session.total = 0; session.best = null; session.history = []; session.allRatings = [];
+      session.posData = { FWD: {sum:0, count:0}, MID: {sum:0, count:0}, DEF: {sum:0, count:0}, GK: {sum:0, count:0} };
+      session.dryStreak = 0; session.expectedGoldPlus = 0; session.actualGoldPlus = 0;
+      initDrawPool(); renderDashboard(); drawScatterplot(); resetAll(); 
   }
   
   dashReset.addEventListener('click', triggerReset);
@@ -921,6 +905,7 @@
     btn.addEventListener('click', () => {
       document.body.dataset.theme = btn.dataset.t;
       document.querySelectorAll('.theme-swatch').forEach(b => b.classList.remove('active')); btn.classList.add('active');
+      drawScatterplot(); // Redraw chart for contrast
     });
   });
 
@@ -928,8 +913,7 @@
     modal.classList.remove('show'); setTimeout(() => modal.classList.add('hidden'), 300);
     offset = 0; lastTs = null; lastCrossedIndex = -1; state = 'idle';
     readMetrics(); buildBalls(); renderBalls(); applyTransform(0);
-    updateTriesUI(); 
-    scannerOuter.style.opacity = '';
+    updateTriesUI(); scannerOuter.style.opacity = '';
   }
 
   function beginSpin(){
@@ -937,8 +921,7 @@
     if(drawPool.length === 0) return; 
     try{ ctx().resume && ctx().resume(); }catch(e){}
     state = 'spinning'; lastTs = null; 
-    spinBtn.classList.add('hidden');
-    document.getElementById('endOptions').classList.add('hidden');
+    spinBtn.classList.add('hidden'); document.getElementById('endOptions').classList.add('hidden');
     setTimeout(() => { if(state === 'spinning') tapOverlay.classList.remove('hidden'); }, 350);
     rafId = requestAnimationFrame(spinLoop);
   }
@@ -958,20 +941,16 @@
   });
 
   let resizeTimer = null;
-  window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { if(state === 'idle') resetAll(); }, 200); });
-  window.addEventListener('orientationchange', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { if(state === 'idle') resetAll(); }, 250); });
+  window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { if(state === 'idle') resetAll(); if(dashPanel.classList.contains('open')) drawScatterplot(); }, 200); });
+  window.addEventListener('orientationchange', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { if(state === 'idle') resetAll(); if(dashPanel.classList.contains('open')) drawScatterplot(); }, 250); });
 
-  // Dynamically renders the player list based on the LIVE remaining pool
   function renderPlayers(){
     let counts = { legendary:[], black:[], gold:[], silver:[], bronze:[], white:[] };
     drawPool.forEach(p => counts[p.rarity].push(p));
-
     playersList.innerHTML = RARITIES.map(r => {
       const pool = counts[r.key] || [];
       pool.sort((a,b) => a.fullName.localeCompare(b.fullName));
-
       const rows = pool.map((p) => `<div class="plyr-row"><span class="plyr-dot" data-r="${r.key}"></span><span class="plyr-name">${p.fullName}</span><span class="plyr-pos">${p.pos}</span></div>`).join('');
-      
       return `<div class="plyr-group"><div class="plyr-group-title" data-r="${r.key}">${RARITY_LABEL[r.key]}<span class="plyr-count">${pool.length} left</span></div>${rows || '<div class="plyr-row" style="color:var(--text-dim); justify-content:center;">None remaining</div>'}</div>`;
     }).join('');
   }
